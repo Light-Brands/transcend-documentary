@@ -10,9 +10,23 @@ export function Container() {
   return (
     <section
       id="container"
-      className="relative bg-void-black py-24 md:py-32 lg:py-40"
+      className="relative py-24 md:py-32 lg:py-40 overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-6">
+      {/* Background with subtle warm undertone emerging */}
+      <div className="absolute inset-0 bg-gradient-to-b from-void-black via-void-black to-[#0d0c0a]" />
+
+      {/* Subtle pre-dawn warmth hint */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-1/3 pointer-events-none"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 2 }}
+      >
+        <div className="w-full h-full bg-gradient-to-t from-sacred-gold/[0.02] to-transparent" />
+      </motion.div>
+
+      <div className="relative max-w-6xl mx-auto px-6">
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
           <span className="text-caption uppercase text-mist tracking-[0.2em]">
@@ -49,9 +63,9 @@ export function Container() {
                 viewport={viewportSettings}
                 transition={{ delay: 0.5, duration: 1 }}
               >
-                {/* Warm light representations */}
+                {/* Warm light representations - candle-like flames */}
                 <motion.div
-                  className="w-2 h-24 bg-gradient-to-t from-ember/60 to-transparent rounded-full"
+                  className="w-2 h-24 bg-gradient-to-t from-ember/70 via-sacred-gold/50 to-transparent rounded-full"
                   animate={{
                     opacity: [0.4, 0.8, 0.4],
                     height: ['6rem', '7rem', '6rem'],
@@ -63,7 +77,7 @@ export function Container() {
                   }}
                 />
                 <motion.div
-                  className="w-2 h-32 bg-gradient-to-t from-sacred-gold/60 to-transparent rounded-full"
+                  className="w-2 h-32 bg-gradient-to-t from-sacred-gold/70 via-ember/50 to-transparent rounded-full"
                   animate={{
                     opacity: [0.5, 0.9, 0.5],
                     height: ['8rem', '9rem', '8rem'],
@@ -76,7 +90,7 @@ export function Container() {
                   }}
                 />
                 <motion.div
-                  className="w-2 h-20 bg-gradient-to-t from-ember/60 to-transparent rounded-full"
+                  className="w-2 h-20 bg-gradient-to-t from-ember/70 via-sacred-gold/50 to-transparent rounded-full"
                   animate={{
                     opacity: [0.3, 0.7, 0.3],
                     height: ['5rem', '6rem', '5rem'],
@@ -90,6 +104,17 @@ export function Container() {
                 />
               </motion.div>
             </div>
+
+            {/* Warm glow emanating from the lights */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2, delay: 1 }}
+            >
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-gradient-radial from-sacred-gold/10 via-ember/5 to-transparent" />
+            </motion.div>
           </div>
         </ScrollReveal>
       </div>

@@ -10,14 +10,28 @@ export function Promise() {
   return (
     <section
       id="promise"
-      className="relative bg-ash py-24 md:py-32 lg:py-40"
+      className="relative py-24 md:py-32 lg:py-40 overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Central question */}
+      {/* Warm ambient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1a1815] via-[#1c1916] to-ash" />
+
+      {/* Subtle warm glow overlay */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 2 }}
+      >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-gradient-radial from-sacred-gold/[0.04] via-ember/[0.02] to-transparent" />
+      </motion.div>
+
+      <div className="relative max-w-6xl mx-auto px-6">
+        {/* Central question with enhanced typography */}
         <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
           <LineReveal
             lines={CONTENT.promise.lines}
-            className="space-y-2"
+            className="space-y-3"
             lineClassName="font-display text-section-sm md:text-section lg:text-section-lg text-light"
             staggerDelay={0.2}
           />
@@ -33,11 +47,11 @@ export function Promise() {
         >
           <VideoLoop
             aspectRatio="cinematic"
-            placeholderGradient="from-void-black via-smoke to-ash"
+            placeholderGradient="from-void-black via-[#1a1510] to-ash"
             className="w-full"
           />
 
-          {/* Light reveal effect overlay */}
+          {/* Warm light reveal effect overlay */}
           <motion.div
             className="absolute inset-0 flex items-center justify-center"
             initial={{ opacity: 0 }}
@@ -45,9 +59,9 @@ export function Promise() {
             viewport={viewportSettings}
             transition={{ delay: 1.2, duration: 1.5 }}
           >
-            {/* Radial light effect */}
+            {/* Radial warm light effect */}
             <motion.div
-              className="w-1/2 h-full bg-gradient-to-r from-transparent via-ember/20 to-transparent"
+              className="w-1/2 h-full bg-gradient-to-r from-transparent via-ember/25 to-transparent"
               animate={{
                 opacity: [0.3, 0.6, 0.3],
               }}
@@ -58,6 +72,15 @@ export function Promise() {
               }}
             />
           </motion.div>
+
+          {/* Golden hour light spill */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-t from-sacred-gold/5 via-transparent to-transparent"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 2, delay: 1 }}
+          />
 
           {/* Silhouette placeholder */}
           <div className="absolute inset-0 flex items-end justify-center">
