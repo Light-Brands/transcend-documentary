@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className="light" suppressHydrationWarning>
       <head>
         {/* Google Fonts - loaded via link tags for production reliability */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -56,9 +56,9 @@ export default function RootLayout({
               (function() {
                 try {
                   var theme = localStorage.getItem('theme');
-                  if (theme === 'light' || (!theme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-                    document.documentElement.classList.remove('dark');
-                    document.documentElement.classList.add('light');
+                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
                   }
                 } catch (e) {}
               })();

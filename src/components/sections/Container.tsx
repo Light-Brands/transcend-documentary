@@ -10,10 +10,10 @@ export function Container() {
   return (
     <section
       id="container"
-      className="relative py-24 md:py-32 lg:py-40 overflow-hidden"
+      className="relative py-24 md:py-32 lg:py-40 overflow-hidden bg-[var(--bg-primary)] transition-colors duration-500"
     >
       {/* Background with subtle warm undertone emerging */}
-      <div className="absolute inset-0 bg-gradient-to-b from-void-black via-void-black to-[#0d0c0a]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-primary)] to-[var(--warmth-1)] transition-colors duration-500" />
 
       {/* Subtle pre-dawn warmth hint */}
       <motion.div
@@ -29,7 +29,7 @@ export function Container() {
       <div className="relative max-w-6xl mx-auto px-6">
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
-          <span className="text-caption uppercase text-mist tracking-[0.2em]">
+          <span className="text-caption uppercase text-[var(--text-muted)] tracking-[0.2em]">
             {CONTENT.container.header}
           </span>
         </ScrollReveal>
@@ -39,7 +39,7 @@ export function Container() {
           <LineReveal
             lines={CONTENT.container.description}
             className="space-y-2"
-            lineClassName="font-display italic text-quote-sm md:text-quote text-cloud"
+            lineClassName="font-display italic text-quote-sm md:text-quote text-[var(--text-secondary)]"
             staggerDelay={0.15}
           />
         </div>
@@ -49,9 +49,9 @@ export function Container() {
           <div className="relative">
             <VideoLoop
               aspectRatio="cinematic"
-              placeholderGradient="from-smoke via-ash to-void-black"
+              placeholderGradient="from-[var(--bg-tertiary)] via-[var(--bg-secondary)] to-[var(--bg-primary)]"
               className="w-full"
-              overlayClassName="from-void-black/80 via-void-black/40 to-void-black/80"
+              overlayClassName="from-[var(--bg-primary)]/80 via-[var(--bg-primary)]/40 to-[var(--bg-primary)]/80"
             />
 
             {/* Decorative elements within placeholder */}

@@ -59,7 +59,7 @@ export function Invitation() {
             <p className="text-body-sm text-[var(--text-muted)]">
               {CONTENT.invitation.footer.presented}
             </p>
-            <p className="text-caption uppercase text-[var(--bg-tertiary)] dark:text-smoke tracking-widest">
+            <p className="text-caption uppercase text-[var(--text-muted)] tracking-widest">
               {CONTENT.invitation.footer.production}
             </p>
           </div>
