@@ -18,6 +18,12 @@
   --color-sacred-gold: #C9A962;
   --color-ember: #D4A574;
 
+  /* Warm transition colors */
+  --color-warmth-1: #0d0c0a;
+  --color-warmth-2: #141311;
+  --color-warmth-3: #1a1815;
+  --color-warmth-4: #1c1916;
+
   /* Typography */
   --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
   --font-body: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
@@ -346,4 +352,94 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* ===================================
+   EPISODE CARD ENHANCEMENTS
+   =================================== */
+
+.episode-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.episode-card-link:focus-visible {
+  outline: 2px solid var(--color-sacred-gold);
+  outline-offset: 4px;
+}
+
+/* Warm glow effect for interactive elements */
+.glow-warm {
+  box-shadow: 0 0 30px rgba(201, 169, 98, 0.1),
+              0 0 60px rgba(212, 165, 116, 0.05);
+}
+
+/* ===================================
+   DARK TO LIGHT TRANSITION
+   =================================== */
+
+.gradient-dark-to-warm {
+  background: linear-gradient(
+    180deg,
+    var(--color-void-black) 0%,
+    var(--color-warmth-1) 25%,
+    var(--color-warmth-2) 50%,
+    var(--color-warmth-3) 75%,
+    var(--color-warmth-4) 100%
+  );
+}
+
+.gradient-warm-ambient {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(201, 169, 98, 0.03) 0%,
+    rgba(212, 165, 116, 0.02) 40%,
+    transparent 70%
+  );
+}
+
+/* ===================================
+   SELECTION STYLING
+   =================================== */
+
+::selection {
+  background-color: var(--color-sacred-gold);
+  color: var(--color-void-black);
+}
+
+::-moz-selection {
+  background-color: var(--color-sacred-gold);
+  color: var(--color-void-black);
+}
+
+/* ===================================
+   FOCUS STATES
+   =================================== */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-sacred-gold);
+  outline-offset: 2px;
+}
+
+/* ===================================
+   SCROLLBAR STYLING
+   =================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-void-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-smoke);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-mist);
 }

@@ -19,6 +19,13 @@ const config: Config = {
         'light': '#F5F5F5',
         'sacred-gold': '#C9A962',
         'ember': '#D4A574',
+        // Warm transition colors
+        'warmth': {
+          1: '#0d0c0a',
+          2: '#141311',
+          3: '#1a1815',
+          4: '#1c1916',
+        },
       },
       fontFamily: {
         display: ['Cormorant Garamond', 'Cormorant', 'Georgia', 'serif'],
