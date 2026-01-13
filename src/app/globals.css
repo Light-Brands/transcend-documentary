@@ -37,17 +37,23 @@
   --transition-medium: 500ms ease-out;
   --transition-fast: 300ms ease-out;
 
-  /* Theme-aware colors - defaults to dark */
-  --bg-primary: #0A0A0A;
-  --bg-secondary: #1A1A1A;
-  --bg-tertiary: #2D2D2D;
-  --text-primary: #F5F5F5;
-  --text-secondary: #C9C9C9;
-  --text-muted: #8A8A8A;
-  --border-color: #2D2D2D;
-  --border-hover: #8A8A8A;
-  --card-bg: #1A1A1A;
-  --overlay-bg: rgba(10, 10, 10, 0.8);
+  /* Theme-aware colors - defaults to light */
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #F5F5F5;
+  --bg-tertiary: #EBEBEB;
+  --text-primary: #1A1A1A;
+  --text-secondary: #2D2D2D;
+  --text-muted: #6B6B6B;
+  --border-color: #E0E0E0;
+  --border-hover: #B0B0B0;
+  --card-bg: #FFFFFF;
+  --overlay-bg: rgba(255, 255, 255, 0.9);
+
+  /* Light warm transition colors (default) */
+  --warmth-1: #FDFCFA;
+  --warmth-2: #FAF8F5;
+  --warmth-3: #F7F5F0;
+  --warmth-4: #F5F2EC;
 }
 
 /* Dark Theme (default) */

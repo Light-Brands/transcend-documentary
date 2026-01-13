@@ -15,11 +15,10 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
     <motion.button
       onClick={toggleTheme}
       className={`relative flex items-center justify-center w-14 h-14 rounded-full
-        bg-ash/80 dark:bg-ash/80 light:bg-cloud/80
-        border border-smoke dark:border-smoke light:border-mist
-        backdrop-blur-sm shadow-lg
+        bg-[var(--card-bg)]/90 backdrop-blur-sm shadow-lg
+        border border-[var(--border-color)]
         hover:border-sacred-gold focus:outline-none focus-visible:ring-2
-        focus-visible:ring-sacred-gold transition-colors ${className}`}
+        focus-visible:ring-sacred-gold transition-all duration-300 ${className}`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}

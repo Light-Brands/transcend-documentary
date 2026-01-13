@@ -104,7 +104,7 @@ export function LineReveal({
             className={cn(
               lineClassName,
               isGold && 'text-sacred-gold',
-              isLight && 'text-light'
+              isLight && 'text-[var(--text-primary)]'
             )}
           >
             {line}

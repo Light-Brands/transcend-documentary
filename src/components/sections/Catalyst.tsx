@@ -9,14 +9,14 @@ export function Catalyst() {
   return (
     <section
       id="catalyst"
-      className="relative bg-ash py-24 md:py-32 lg:py-40"
+      className="relative bg-[var(--bg-secondary)] py-24 md:py-32 lg:py-40 transition-colors duration-500"
     >
       {/* First part - Portrait and intro quote */}
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Portrait placeholder */}
           <ScrollReveal className="order-2 lg:order-1">
-            <div className="relative aspect-[3/4] bg-gradient-to-br from-smoke via-ash to-void-black overflow-hidden">
+            <div className="relative aspect-[3/4] bg-gradient-to-br from-[var(--bg-tertiary)] via-[var(--bg-secondary)] to-[var(--bg-primary)] overflow-hidden transition-colors duration-500">
               {/* Ambient glow effect */}
               <motion.div
                 className="absolute inset-0 flex items-center justify-center"
@@ -34,7 +34,7 @@ export function Catalyst() {
 
               {/* Placeholder silhouette */}
               <div className="absolute inset-0 flex items-end justify-center">
-                <div className="w-2/3 h-4/5 bg-gradient-to-t from-void-black via-smoke/50 to-transparent rounded-t-full" />
+                <div className="w-2/3 h-4/5 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-tertiary)]/50 to-transparent rounded-t-full transition-colors duration-500" />
               </div>
 
               {/* Side light effect */}
@@ -47,7 +47,7 @@ export function Catalyst() {
             <LineReveal
               lines={CONTENT.catalyst.intro.lines}
               className="space-y-1"
-              lineClassName="font-display italic text-quote-sm md:text-quote text-cloud"
+              lineClassName="font-display italic text-quote-sm md:text-quote text-[var(--text-secondary)]"
               staggerDelay={0.12}
             />
 
@@ -70,7 +70,7 @@ export function Catalyst() {
         <LineReveal
           lines={CONTENT.catalyst.continuation.lines}
           className="space-y-2"
-          lineClassName="font-display text-quote-sm md:text-quote lg:text-quote-lg text-light"
+          lineClassName="font-display text-quote-sm md:text-quote lg:text-quote-lg text-[var(--text-primary)]"
           staggerDelay={0.18}
         />
       </div>
