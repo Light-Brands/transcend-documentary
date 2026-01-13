@@ -19,7 +19,7 @@ export function EpisodeCard({ episode, index, className }: EpisodeCardProps) {
     <Link href={`/episodes/${episode.id}`}>
       <motion.article
         className={cn(
-          'group relative bg-gradient-to-br from-ash to-[#1E1E1C] border border-smoke/60 p-6 md:p-8',
+          'group relative bg-gradient-to-br from-[var(--card-bg)] to-[var(--bg-tertiary)] border border-[var(--border-color)] p-6 md:p-8',
           'transition-all duration-500 cursor-pointer h-full',
           'hover:border-sacred-gold/40 hover:shadow-lg hover:shadow-sacred-gold/5',
           className
@@ -57,16 +57,16 @@ export function EpisodeCard({ episode, index, className }: EpisodeCardProps) {
           <span className="text-caption-sm uppercase text-sacred-gold/80 tracking-widest">
             {episode.number}
           </span>
-          <span className="text-caption-sm text-mist">{episode.runtime}</span>
+          <span className="text-caption-sm text-[var(--text-muted)]">{episode.runtime}</span>
         </div>
 
         {/* Title */}
-        <h3 className="font-display text-2xl md:text-3xl text-light mt-2 mb-4 group-hover:text-sacred-gold transition-colors duration-300">
+        <h3 className="font-display text-2xl md:text-3xl text-[var(--text-primary)] mt-2 mb-4 group-hover:text-sacred-gold transition-colors duration-300">
           {episode.title}
         </h3>
 
         {/* Theme */}
-        <div className="flex items-center gap-2 text-sm text-cloud mb-4">
+        <div className="flex items-center gap-2 text-sm text-[var(--text-secondary)] mb-4">
           <span>{episode.theme}</span>
           <span className="text-sacred-gold">&</span>
           <span>{episode.themeSecondary}</span>
@@ -74,14 +74,14 @@ export function EpisodeCard({ episode, index, className }: EpisodeCardProps) {
 
         {/* Divider */}
         <motion.div
-          className="w-12 h-px bg-smoke mb-4"
-          animate={{ width: isHovered ? '3rem' : '3rem', backgroundColor: isHovered ? '#C9A962' : '#2D2D2D' }}
+          className="w-12 h-px bg-[var(--border-color)] mb-4"
+          animate={{ width: isHovered ? '3rem' : '3rem', backgroundColor: isHovered ? '#C9A962' : 'var(--border-color)' }}
           transition={{ duration: 0.3 }}
         />
 
         {/* Hook */}
         <motion.p
-          className="text-body-sm text-mist leading-relaxed"
+          className="text-body-sm text-[var(--text-muted)] leading-relaxed"
           initial={{ opacity: 0.7 }}
           animate={{ opacity: isHovered ? 1 : 0.7 }}
           transition={{ duration: 0.3 }}
@@ -99,7 +99,7 @@ export function EpisodeCard({ episode, index, className }: EpisodeCardProps) {
           }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
-          <p className="text-body-sm text-cloud/80 mt-4 pt-4 border-t border-smoke/50">
+          <p className="text-body-sm text-[var(--text-secondary)] opacity-80 mt-4 pt-4 border-t border-[var(--border-color)]">
             {episode.extendedHook}
           </p>
         </motion.div>

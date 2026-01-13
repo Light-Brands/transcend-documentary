@@ -7,7 +7,7 @@ export function Truth() {
   return (
     <section
       id="truth"
-      className="relative min-h-screen flex items-center justify-center bg-void-black px-6 py-24"
+      className="relative min-h-screen flex items-center justify-center bg-[var(--bg-primary)] px-6 py-24 transition-colors duration-500"
     >
       <div className="max-w-4xl mx-auto text-center">
         <LineReveal

@@ -13,7 +13,7 @@ export function Promise() {
       className="relative py-24 md:py-32 lg:py-40 overflow-hidden"
     >
       {/* Warm ambient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1a1815] via-[#1c1916] to-ash" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--warmth-3,#1a1815)] via-[var(--warmth-4,#1c1916)] to-[var(--bg-secondary)] transition-colors duration-500" />
 
       {/* Subtle warm glow overlay */}
       <motion.div
@@ -32,7 +32,7 @@ export function Promise() {
           <LineReveal
             lines={CONTENT.promise.lines}
             className="space-y-3"
-            lineClassName="font-display text-section-sm md:text-section lg:text-section-lg text-light"
+            lineClassName="font-display text-section-sm md:text-section lg:text-section-lg text-[var(--text-primary)]"
             staggerDelay={0.2}
           />
         </div>
@@ -47,7 +47,7 @@ export function Promise() {
         >
           <VideoLoop
             aspectRatio="cinematic"
-            placeholderGradient="from-void-black via-[#1a1510] to-ash"
+            placeholderGradient="from-[var(--bg-primary)] via-[var(--warmth-2,#1a1510)] to-[var(--bg-secondary)]"
             className="w-full"
           />
 
@@ -85,7 +85,7 @@ export function Promise() {
           {/* Silhouette placeholder */}
           <div className="absolute inset-0 flex items-end justify-center">
             <motion.div
-              className="w-1/4 h-3/4 bg-gradient-to-t from-void-black via-void-black/80 to-transparent"
+              className="w-1/4 h-3/4 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-primary)]/80 to-transparent"
               style={{
                 clipPath: 'ellipse(50% 100% at 50% 100%)',
               }}
