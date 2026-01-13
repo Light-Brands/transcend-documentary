@@ -11,7 +11,7 @@ export function Hero() {
         <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center">
           {/* Logo/Title */}
           <motion.h1
-            className="font-display text-display-sm md:text-display lg:text-display-lg text-light tracking-[0.15em] mb-6"
+            className="font-display text-display-sm md:text-display lg:text-display-lg text-[var(--text-primary)] tracking-[0.15em] mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.5 }}
@@ -21,7 +21,7 @@ export function Hero() {
 
           {/* Tagline */}
           <motion.p
-            className="font-display italic text-quote-sm md:text-quote text-cloud/90 max-w-2xl"
+            className="font-display italic text-quote-sm md:text-quote text-[var(--text-secondary)] max-w-2xl opacity-90"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, delay: 1.5 }}
@@ -36,7 +36,7 @@ export function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 2.5 }}
           >
-            <span className="text-caption-sm uppercase text-mist tracking-widest">
+            <span className="text-caption-sm uppercase text-[var(--text-muted)] tracking-widest">
               {CONTENT.hero.scrollHint}
             </span>
             <motion.div

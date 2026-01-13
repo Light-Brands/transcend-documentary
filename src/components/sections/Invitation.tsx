@@ -10,7 +10,7 @@ export function Invitation() {
   return (
     <section
       id="invitation"
-      className="relative bg-void-black py-24 md:py-32 lg:py-40"
+      className="relative bg-[var(--bg-primary)] py-24 md:py-32 lg:py-40 transition-colors duration-500"
     >
       <div className="max-w-4xl mx-auto px-6 text-center">
         {/* Section header */}
@@ -25,7 +25,7 @@ export function Invitation() {
           <LineReveal
             lines={CONTENT.invitation.lines}
             className="space-y-2"
-            lineClassName="font-display text-quote-sm md:text-quote text-cloud"
+            lineClassName="font-display text-quote-sm md:text-quote text-[var(--text-secondary)]"
             staggerDelay={0.15}
           />
         </div>
@@ -49,23 +49,23 @@ export function Invitation() {
 
         {/* Footer credits */}
         <motion.footer
-          className="pt-16 border-t border-smoke"
+          className="pt-16 border-t border-[var(--border-color)]"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={viewportSettings}
           transition={{ delay: 1, duration: 1 }}
         >
           <div className="space-y-3">
-            <p className="text-body-sm text-mist">
+            <p className="text-body-sm text-[var(--text-muted)]">
               {CONTENT.invitation.footer.presented}
             </p>
-            <p className="text-caption uppercase text-smoke tracking-widest">
+            <p className="text-caption uppercase text-[var(--bg-tertiary)] dark:text-smoke tracking-widest">
               {CONTENT.invitation.footer.production}
             </p>
           </div>
 
           {/* Copyright */}
-          <p className="text-caption-sm text-smoke/60 mt-12">
+          <p className="text-caption-sm text-[var(--text-muted)] opacity-60 mt-12">
             &copy; {new Date().getFullYear()} Transcend Documentary. All rights reserved.
           </p>
         </motion.footer>

@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { useTheme } from '@/context/ThemeContext';
 
 interface VideoLoopProps {
   src?: string;
@@ -21,7 +22,7 @@ export function VideoLoop({
   overlayClassName,
   aspectRatio = 'cinematic',
   showOverlay = true,
-  placeholderGradient = 'from-ash via-smoke to-void-black',
+  placeholderGradient = 'from-[var(--bg-secondary)] via-[var(--bg-tertiary)] to-[var(--bg-primary)]',
 }: VideoLoopProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -95,7 +96,7 @@ export function VideoLoop({
       {showOverlay && (
         <div
           className={cn(
-            'absolute inset-0 bg-gradient-to-t from-void-black via-void-black/50 to-transparent',
+            'absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-primary)]/50 to-transparent transition-colors duration-500',
             overlayClassName
           )}
         />
@@ -119,6 +120,11 @@ export function VideoBackground({
   overlayOpacity = 0.6,
 }: VideoBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
+  // Colors for overlay based on theme
+  const overlayColor = isDark ? '10, 10, 10' : '250, 250, 250';
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
@@ -136,7 +142,7 @@ export function VideoBackground({
           <source src={src} type="video/mp4" />
         </video>
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-void-black via-ash to-smoke">
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)] transition-colors duration-500">
           {/* Ambient animated elements for placeholder */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div
@@ -155,14 +161,14 @@ export function VideoBackground({
         </div>
       )}
 
-      {/* Dark overlay */}
+      {/* Dark/Light overlay */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 transition-all duration-500"
         style={{
           background: `linear-gradient(180deg,
-            rgba(10, 10, 10, ${overlayOpacity * 0.5}) 0%,
-            rgba(10, 10, 10, ${overlayOpacity}) 50%,
-            rgba(10, 10, 10, ${overlayOpacity * 1.2}) 100%
+            rgba(${overlayColor}, ${overlayOpacity * 0.5}) 0%,
+            rgba(${overlayColor}, ${overlayOpacity}) 50%,
+            rgba(${overlayColor}, ${overlayOpacity * 1.2}) 100%
           )`,
         }}
       />

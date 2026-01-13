@@ -12,7 +12,7 @@ export function Journeys() {
       className="relative py-24 md:py-32 lg:py-40 overflow-hidden"
     >
       {/* Background gradient - dark to warm transition */}
-      <div className="absolute inset-0 bg-gradient-to-b from-void-black via-[#141311] to-[#1a1815]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--warmth-2,#141311)] to-[var(--warmth-3,#1a1815)] transition-colors duration-500" />
 
       {/* Subtle warm light glow from bottom */}
       <motion.div
@@ -26,7 +26,7 @@ export function Journeys() {
       </motion.div>
 
       {/* Decorative light rays */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-void-black to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[var(--bg-primary)] to-transparent pointer-events-none transition-colors duration-500" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section header with enhanced styling */}
@@ -61,7 +61,7 @@ export function Journeys() {
           <LineReveal
             lines={CONTENT.journeys.intro}
             className="space-y-3"
-            lineClassName="font-display text-section-sm md:text-section text-cloud/90"
+            lineClassName="font-display text-section-sm md:text-section text-[var(--text-secondary)] opacity-90"
             staggerDelay={0.15}
           />
         </div>
@@ -90,10 +90,10 @@ export function Journeys() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <div className="flex items-center gap-3 text-mist">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-smoke" />
+          <div className="flex items-center gap-3 text-[var(--text-muted)]">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[var(--bg-tertiary)]" />
             <span className="text-caption-sm uppercase tracking-widest">Click to explore each story</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-smoke" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[var(--bg-tertiary)]" />
           </div>
         </motion.div>
       </div>
