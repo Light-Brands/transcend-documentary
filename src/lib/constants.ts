@@ -153,12 +153,84 @@ export const EPISODES: Episode[] = [
   },
 ];
 
+// Character data for THE PEOPLE section
+export interface Character {
+  id: string;
+  name: string;
+  role: string;
+  sentence: string;
+  question: string;
+  episode: number;
+}
+
+export const CHARACTERS: Character[] = [
+  {
+    id: 'julien',
+    name: 'Julien',
+    role: 'The Fighter',
+    sentence: 'Fifteen years of training his body to endure violence. The noise in his mind became louder than the crowd.',
+    question: 'What happens when strength stops protecting you?',
+    episode: 2,
+  },
+  {
+    id: 'businessman',
+    name: 'The Businessman',
+    role: 'The Builder',
+    sentence: 'Decades building empires. His success was fueled by unresolved trauma.',
+    question: 'What survives when the empire falls?',
+    episode: 3,
+  },
+  {
+    id: 'pastor',
+    name: 'The Former Pastor',
+    role: 'The Seeker',
+    sentence: 'Ministry as refuge. Ministry as escape. Beneath it all: war, displacement, abandonment.',
+    question: 'What happens when faith meets the medicine?',
+    episode: 4,
+  },
+  {
+    id: 'wife',
+    name: 'The Wife',
+    role: 'The Witness',
+    sentence: 'Twenty years alongside addiction. Refusing to let go. His healing revealed her own pain.',
+    question: 'Who heals the one who stayed?',
+    episode: 5,
+  },
+  {
+    id: 'nicholas',
+    name: 'Nicholas',
+    role: 'The Catalyst',
+    sentence: 'The one who returns last—because he keeps returning with others.',
+    question: 'What does it mean to walk someone home?',
+    episode: 6,
+  },
+];
+
 // Section content
 export const CONTENT = {
   hero: {
-    title: 'TRANSCEND',
-    tagline: 'Bringing the Lost Traveler Back Home',
-    scrollHint: 'Begin the journey',
+    // Kinetic typography sequence
+    kineticWords: ['PAIN', 'PURPOSE'],
+    tagline: 'BRINGING THE LOST TRAVELER BACK HOME',
+    subtitle: 'A documentary series about return.',
+    scrollHint: 'Enter',
+  },
+  // ACT I - DISSONANCE: Modern world, performance, addiction, silence, disconnection
+  dissonance: {
+    actLabel: 'Act I — Dissonance',
+    lines: [
+      'Modern world.',
+      'Performance.',
+      'Addiction.',
+      '',
+      'Silence.',
+      '',
+      'Disconnection.',
+    ],
+  },
+  // Blackout moment
+  blackout: {
+    line: 'Most people never come home.',
   },
   truth: {
     lines: [
@@ -203,14 +275,23 @@ export const CONTENT = {
       ],
     },
   },
+  // ACT II - THE CONTAINER
   container: {
-    header: 'TRANSCEND CLINIC',
+    actLabel: 'Act II — The Container',
+    header: 'TRANSCEND',
+    tagline: 'Every story passes through a place.',
     description: [
       'A place where people are received with seriousness.',
       'Where ancient intelligence meets modern care.',
       'Where healing is not rushed, promised,',
       'or commodified.',
     ],
+  },
+  // ACT III - THE PEOPLE
+  people: {
+    actLabel: 'Act III — The People',
+    header: 'THE JOURNEYS',
+    intro: 'Five stories. One return.',
   },
   journeys: {
     header: 'A DOCUMENTARY SERIES',
@@ -225,16 +306,21 @@ export const CONTENT = {
       'One return.',
     ],
   },
+  // ACT IV - RETURN
   promise: {
+    actLabel: 'Act IV — Return',
     lines: [
-      'From place to people to purpose.',
+      'Integration.',
+      'Shadow.',
+      'Wholeness.',
       '',
-      'Transcend opens as the container.',
-      'Human stories deepen the tension.',
-      'Nicholas closes the loop as the living mandate.',
-      '',
-      'Bringing the Lost Traveler Back Home.',
+      'Responsibility.',
     ],
+    closingLine: 'Bringing the Lost Traveler Back Home.',
+  },
+  // Ecosystem signal
+  ecosystem: {
+    line: 'This series is the narrative foundation for a larger ecosystem of care, intelligence, and integration.',
   },
   invitation: {
     header: 'PARTNERSHIP',
@@ -245,7 +331,7 @@ export const CONTENT = {
     ],
     cta: 'Begin the Conversation',
     footer: {
-      presented: 'Presented by TRANSCEND CLINIC',
+      presented: 'TRANSCEND CLINIC',
       production: 'A Light Brands Collective Production',
     },
   },

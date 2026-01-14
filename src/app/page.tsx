@@ -1,10 +1,11 @@
 import {
   Hero,
+  Dissonance,
+  Blackout,
   Truth,
   Turning,
-  Catalyst,
   Container,
-  Journeys,
+  People,
   Promise,
   Invitation,
 } from '@/components/sections';
@@ -16,38 +17,38 @@ export default function Home() {
       {/* Cinematic Header with sticky navigation */}
       <Header />
 
-      <main className="relative">
-        {/* ACT I: THE DESCENT */}
-        {/* Opening scene - title card */}
+      <main className="relative bg-void-black">
+        {/* OPENING: Motion-first hero with PAIN → PURPOSE kinetic typography */}
         <Hero />
 
-        {/* The truth - voiceover monologue */}
-        <div className="relative bg-[var(--bg-primary)] transition-colors duration-500">
-          <Truth />
-        </div>
+        {/* ACT I — DISSONANCE */}
+        {/* Modern world, performance, addiction, silence, disconnection */}
+        <Dissonance />
 
-        {/* The turning - scene transition */}
+        {/* "Holy Sh*t" moment - blackout with devastating truth */}
+        <Blackout />
+
+        {/* The truth - maps, not defects */}
+        <Truth />
+
+        {/* The turning - remembering who we are */}
         <Turning />
 
-        {/* The catalyst - Nicholas's chapter */}
-        <Catalyst />
-
-        {/* ACT II: THE CONTAINER */}
-        {/* Transcend Clinic - grounded, medical credibility */}
+        {/* ACT II — THE CONTAINER */}
+        {/* Transcend - "Every story passes through a place" */}
         <Container />
 
-        {/* ACT III: THE JOURNEYS */}
-        {/* Documentary series - film festival program */}
-        <Journeys />
+        {/* ACT III — THE PEOPLE */}
+        {/* Julien, Businessman, Pastor, Wife, Nicholas */}
+        <People />
 
-        {/* The promise - thematic question */}
+        {/* ACT IV — RETURN */}
+        {/* Integration, Shadow, Wholeness, Responsibility */}
         <Promise />
 
         {/* END CREDITS */}
-        {/* Partnership invitation & closing credits */}
-        <div className="relative bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)] transition-colors duration-500">
-          <Invitation />
-        </div>
+        {/* Partnership invitation, ecosystem signal & closing credits */}
+        <Invitation />
       </main>
     </>
   );
