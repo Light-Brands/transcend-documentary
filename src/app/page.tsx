@@ -8,52 +8,47 @@ import {
   Promise,
   Invitation,
 } from '@/components/sections';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { Header } from '@/components/ui';
 
 export default function Home() {
   return (
-    <main className="relative">
-      {/* Theme Toggle - Fixed position */}
-      <ThemeToggle className="fixed top-6 right-6 z-50" />
+    <>
+      {/* Cinematic Header with sticky navigation */}
+      <Header />
 
-      {/* Dark sections - the descent */}
-      <div className="relative bg-[var(--bg-primary)] transition-colors duration-500">
-        {/* Section 1: THE THRESHOLD - Hero */}
+      <main className="relative">
+        {/* ACT I: THE DESCENT */}
+        {/* Opening scene - title card */}
         <Hero />
 
-        {/* Section 2: THE TRUTH - Dark statement */}
-        <Truth />
+        {/* The truth - voiceover monologue */}
+        <div className="relative bg-[var(--bg-primary)] transition-colors duration-500">
+          <Truth />
+        </div>
 
-        {/* Section 3: THE TURNING - Shift and possibility */}
+        {/* The turning - scene transition */}
         <Turning />
 
-        {/* Section 4: THE CATALYST - Nicholas's story */}
+        {/* The catalyst - Nicholas's chapter */}
         <Catalyst />
 
-        {/* Section 5: THE CONTAINER - Transcend Clinic */}
+        {/* ACT II: THE CONTAINER */}
+        {/* Transcend Clinic - grounded, medical credibility */}
         <Container />
-      </div>
 
-      {/* Transition zone - emergence from darkness */}
-      <div className="relative">
-        {/* Gradient overlay for smooth dark-to-light transition */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--warmth-4,#1a1915)] pointer-events-none transition-colors duration-500" />
-
-        {/* Section 6: THE JOURNEYS - Episode cards */}
+        {/* ACT III: THE JOURNEYS */}
+        {/* Documentary series - film festival program */}
         <Journeys />
-      </div>
 
-      {/* Light sections - emergence into warmth */}
-      <div className="relative bg-gradient-to-b from-[var(--warmth-4,#1a1915)] via-[var(--warmth-3,#1c1a17)] to-[var(--bg-secondary)] transition-colors duration-500">
-        {/* Section 7: THE PROMISE - Unifying question */}
+        {/* The promise - thematic question */}
         <Promise />
-      </div>
 
-      {/* Return to darkness - the cycle */}
-      <div className="relative bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)] transition-colors duration-500">
-        {/* Section 8: THE INVITATION - Partnership CTA */}
-        <Invitation />
-      </div>
-    </main>
+        {/* END CREDITS */}
+        {/* Partnership invitation & closing credits */}
+        <div className="relative bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)] transition-colors duration-500">
+          <Invitation />
+        </div>
+      </main>
+    </>
   );
 }

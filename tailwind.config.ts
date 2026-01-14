@@ -31,6 +31,7 @@ const config: Config = {
       fontFamily: {
         display: ['Cormorant Garamond', 'Cormorant', 'Georgia', 'serif'],
         body: ['Source Sans 3', 'Source Sans Pro', 'system-ui', 'sans-serif'],
+        accent: ['Special Elite', 'Courier New', 'monospace'],
       },
       fontSize: {
         // Display Headlines
