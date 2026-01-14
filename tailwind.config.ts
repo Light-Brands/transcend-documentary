@@ -1,7 +1,6 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  darkMode: 'class',
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,81 +10,67 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Core Palette from Website Spec
-        'void-black': '#0A0A0A',
-        'ash': '#1A1A1A',
-        'smoke': '#2D2D2D',
-        'mist': '#8A8A8A',
-        'cloud': '#C9C9C9',
-        'light': '#F5F5F5',
-        'sacred-gold': '#C9A962',
-        'ember': '#D4A574',
-        // Warm transition colors
-        'warmth': {
-          1: '#0d0c0a',
-          2: '#141311',
-          3: '#1a1815',
-          4: '#1c1916',
+        // Core Palette
+        'charcoal': '#2C2C2C',
+        'slate': '#4A4A4A',
+        'stone': '#6B6B6B',
+        'pebble': '#9A9A9A',
+        'cloud': '#E8E8E8',
+        'mist': '#F5F5F5',
+        // Accent Colors
+        'sage': {
+          DEFAULT: '#8B9F8B',
+          light: '#A8B8A8',
+          muted: '#C4CFC4',
+          pale: '#E8EDE8',
+        },
+        'gold': {
+          DEFAULT: '#B8A068',
+          light: '#D4C494',
         },
       },
       fontFamily: {
-        display: ['Cormorant Garamond', 'Cormorant', 'Georgia', 'serif'],
-        body: ['Source Sans 3', 'Source Sans Pro', 'system-ui', 'sans-serif'],
+        display: ['Cormorant Garamond', 'Georgia', 'serif'],
+        body: ['Source Sans 3', 'system-ui', 'sans-serif'],
         accent: ['Special Elite', 'Courier New', 'monospace'],
       },
       fontSize: {
-        // Display Headlines
-        'display-lg': ['6rem', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '300' }],
-        'display': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '300' }],
-        'display-sm': ['3rem', { lineHeight: '1.15', letterSpacing: '-0.02em', fontWeight: '300' }],
-        // Section Headlines
-        'section-lg': ['4rem', { lineHeight: '1.15', fontWeight: '400' }],
-        'section': ['3rem', { lineHeight: '1.2', fontWeight: '400' }],
-        'section-sm': ['2rem', { lineHeight: '1.25', fontWeight: '400' }],
-        // Pull Quotes
-        'quote-lg': ['2.5rem', { lineHeight: '1.3', fontWeight: '400' }],
-        'quote': ['2rem', { lineHeight: '1.35', fontWeight: '400' }],
-        'quote-sm': ['1.5rem', { lineHeight: '1.4', fontWeight: '400' }],
+        // Display Headlines - reduced
+        'display-lg': ['3.5rem', { lineHeight: '1.1', letterSpacing: '0.02em', fontWeight: '400' }],
+        'display': ['2.75rem', { lineHeight: '1.15', letterSpacing: '0.02em', fontWeight: '400' }],
+        'display-sm': ['2rem', { lineHeight: '1.2', letterSpacing: '0.01em', fontWeight: '400' }],
+        // Section Headlines - reduced
+        'section-lg': ['2.25rem', { lineHeight: '1.2', fontWeight: '400' }],
+        'section': ['1.75rem', { lineHeight: '1.25', fontWeight: '400' }],
+        'section-sm': ['1.375rem', { lineHeight: '1.3', fontWeight: '400' }],
+        // Pull Quotes - reduced
+        'quote-lg': ['1.5rem', { lineHeight: '1.4', fontWeight: '400' }],
+        'quote': ['1.25rem', { lineHeight: '1.45', fontWeight: '400' }],
+        'quote-sm': ['1.125rem', { lineHeight: '1.5', fontWeight: '400' }],
         // Body Copy
-        'body-lg': ['1.25rem', { lineHeight: '1.7', fontWeight: '300' }],
-        'body': ['1.125rem', { lineHeight: '1.7', fontWeight: '300' }],
-        'body-sm': ['1rem', { lineHeight: '1.6', fontWeight: '300' }],
+        'body-lg': ['1.0625rem', { lineHeight: '1.6', fontWeight: '400' }],
+        'body': ['0.9375rem', { lineHeight: '1.6', fontWeight: '400' }],
+        'body-sm': ['0.875rem', { lineHeight: '1.55', fontWeight: '400' }],
         // Captions
-        'caption': ['0.875rem', { lineHeight: '1.5', letterSpacing: '0.1em', fontWeight: '400' }],
-        'caption-sm': ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.12em', fontWeight: '400' }],
+        'caption': ['0.8125rem', { lineHeight: '1.5', letterSpacing: '0.05em', fontWeight: '400' }],
+        'caption-sm': ['0.6875rem', { lineHeight: '1.5', letterSpacing: '0.08em', fontWeight: '400' }],
       },
       animation: {
-        'fade-up': 'fadeUp 0.8s ease-out forwards',
-        'fade-in': 'fadeIn 1s ease-out forwards',
-        'pulse-slow': 'pulseSlow 3s ease-in-out infinite',
-        'scroll-hint': 'scrollHint 2s ease-in-out infinite',
+        'fade-up': 'fadeUp 0.5s ease-out forwards',
+        'fade-in': 'fadeIn 0.6s ease-out forwards',
       },
       keyframes: {
         fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        pulseSlow: {
-          '0%, 100%': { opacity: '0.5' },
-          '50%': { opacity: '1' },
-        },
-        scrollHint: {
-          '0%, 100%': { transform: 'translateY(0)', opacity: '0.6' },
-          '50%': { transform: 'translateY(8px)', opacity: '1' },
-        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(ellipse at center, var(--tw-gradient-stops))',
-        'gradient-dark': 'linear-gradient(180deg, #0A0A0A 0%, #1A1A1A 100%)',
-        'gradient-warm': 'linear-gradient(180deg, #1A1A1A 0%, #2D2D2D 100%)',
-      },
-      transitionDuration: {
-        '800': '800ms',
-        '1200': '1200ms',
       },
     },
   },

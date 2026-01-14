@@ -8,55 +8,41 @@ export function Turning() {
   return (
     <section
       id="turning"
-      className="relative min-h-screen flex items-center justify-center px-6 py-32 bg-[var(--bg-secondary)] transition-colors duration-500"
+      className="relative min-h-[60vh] flex items-center justify-center px-6 py-20 bg-[var(--bg-secondary)]"
     >
-      {/* Background gradient that creates depth */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)] transition-colors duration-500"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1.5 }}
-      />
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)]" />
 
-      {/* Scene transition indicator */}
+      {/* Scene marker */}
       <motion.div
-        className="absolute top-16 md:top-20 left-1/2 -translate-x-1/2"
+        className="absolute top-10 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
       >
-        <div className="flex items-center gap-3">
-          <div className="w-6 h-px bg-[var(--border-color)]" />
-          <span className="font-accent text-[0.6rem] uppercase tracking-[0.2em] text-[var(--text-muted)]">
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-px bg-[var(--border-color)]" />
+          <span className="font-accent text-[0.5rem] uppercase tracking-[0.15em] text-[var(--text-muted)]">
             The Turning
           </span>
-          <div className="w-6 h-px bg-[var(--border-color)]" />
+          <div className="w-4 h-px bg-[var(--border-color)]" />
         </div>
       </motion.div>
 
       {/* Main content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+      <div className="relative z-10 max-w-2xl mx-auto text-center">
         <LineReveal
           lines={CONTENT.turning.lines}
-          className="space-y-3"
-          lineClassName="font-display text-section-sm md:text-section lg:text-section-lg text-[var(--text-secondary)] leading-[1.3]"
+          className="space-y-1.5"
+          lineClassName="font-display text-section-sm md:text-section text-[var(--text-secondary)] leading-tight"
           lightLines={[3]}
-          staggerDelay={0.3}
+          staggerDelay={0.18}
         />
       </div>
 
-      {/* Subtle warm glow emerging from bottom */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 2, delay: 1 }}
-      >
-        <div className="w-full h-full bg-gradient-to-t from-sacred-gold/[0.03] via-ember/[0.01] to-transparent" />
-      </motion.div>
+      {/* Subtle bottom glow */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[var(--color-sage-pale)]/30 to-transparent pointer-events-none" />
     </section>
   );
 }

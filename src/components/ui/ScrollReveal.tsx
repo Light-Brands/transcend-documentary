@@ -103,7 +103,7 @@ export function LineReveal({
             variants={lineVariants}
             className={cn(
               lineClassName,
-              isGold && 'text-sacred-gold',
+              isGold && 'text-[var(--color-sage)]',
               isLight && 'text-[var(--text-primary)]'
             )}
           >

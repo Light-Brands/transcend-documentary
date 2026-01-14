@@ -1,14 +1,12 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { EPISODES } from '@/lib/constants';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export default function EpisodePage() {
   const params = useParams();
-  const router = useRouter();
   const episodeId = params.id as string;
 
   const episode = EPISODES.find((ep) => ep.id === episodeId);
@@ -18,11 +16,10 @@ export default function EpisodePage() {
 
   if (!episode) {
     return (
-      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center transition-colors duration-500">
-        <ThemeToggle className="fixed top-6 right-6 z-50" />
+      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-display text-4xl text-[var(--text-primary)] mb-4">Episode Not Found</h1>
-          <Link href="/#journeys" className="text-sacred-gold hover:underline">
+          <Link href="/#journeys" className="text-[var(--color-sage)] hover:underline">
             Return to Episodes
           </Link>
         </div>
@@ -31,13 +28,10 @@ export default function EpisodePage() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--bg-primary)] transition-colors duration-500">
-      {/* Theme Toggle */}
-      <ThemeToggle className="fixed top-6 right-6 z-50" />
-
+    <main className="min-h-screen bg-[var(--bg-primary)]">
       {/* Back navigation */}
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-40 px-6 py-4 bg-[var(--bg-primary)]/80 backdrop-blur-sm transition-colors duration-500"
+        className="fixed top-0 left-0 right-0 z-40 px-6 py-4 bg-[var(--bg-primary)]/80 backdrop-blur-sm"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -57,18 +51,18 @@ export default function EpisodePage() {
             </svg>
             <span className="text-sm uppercase tracking-widest">Back to Episodes</span>
           </Link>
-          <Link href="/" className="font-display text-xl text-[var(--text-primary)] hover:text-sacred-gold transition-colors">
+          <Link href="/" className="font-display text-xl text-[var(--text-primary)] hover:text-[var(--color-sage)] transition-colors">
             Transcend
           </Link>
         </div>
       </motion.nav>
 
       {/* Hero section */}
-      <section className="relative pt-32 pb-20 px-6 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)] transition-colors duration-500">
+      <section className="relative pt-32 pb-20 px-6 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)]">
         <div className="max-w-5xl mx-auto">
           {/* Episode number */}
           <motion.span
-            className="inline-block text-caption-sm uppercase text-sacred-gold tracking-[0.3em] mb-6"
+            className="inline-block text-caption-sm uppercase text-[var(--color-sage)] tracking-[0.3em] mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -94,7 +88,7 @@ export default function EpisodePage() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <span className="text-lg text-[var(--text-secondary)]">{episode.theme}</span>
-            <span className="text-sacred-gold text-xl">&</span>
+            <span className="text-[var(--color-sage)] text-xl">&</span>
             <span className="text-lg text-[var(--text-secondary)]">{episode.themeSecondary}</span>
             <span className="mx-4 h-px w-12 bg-[var(--border-color)]" />
             <span className="text-[var(--text-muted)]">{episode.runtime}</span>
@@ -113,9 +107,9 @@ export default function EpisodePage() {
       </section>
 
       {/* Decorative divider */}
-      <div className="max-w-5xl mx-auto px-6 bg-[var(--bg-tertiary)] transition-colors duration-500">
+      <div className="max-w-5xl mx-auto px-6 bg-[var(--bg-tertiary)]">
         <motion.div
-          className="h-px bg-gradient-to-r from-transparent via-sacred-gold/40 to-transparent"
+          className="h-px bg-gradient-to-r from-transparent via-[var(--color-sage)]/40 to-transparent"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
@@ -123,7 +117,7 @@ export default function EpisodePage() {
       </div>
 
       {/* Synopsis section */}
-      <section className="py-20 px-6 bg-[var(--bg-tertiary)] transition-colors duration-500">
+      <section className="py-20 px-6 bg-[var(--bg-tertiary)]">
         <div className="max-w-4xl mx-auto">
           <motion.h2
             className="text-caption uppercase text-[var(--text-muted)] tracking-[0.2em] mb-12"
@@ -151,21 +145,21 @@ export default function EpisodePage() {
       </section>
 
       {/* Pull quote section */}
-      <section className="py-16 px-6 bg-[var(--bg-secondary)] transition-colors duration-500">
+      <section className="py-16 px-6 bg-[var(--bg-secondary)]">
         <motion.div
           className="max-w-4xl mx-auto relative"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-sacred-gold via-sacred-gold/50 to-transparent" />
+          <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-[var(--color-sage)] via-[var(--color-sage)]/50 to-transparent" />
           <blockquote className="pl-8 md:pl-12">
             <p className="font-display text-quote-lg md:text-section-sm text-[var(--text-primary)] italic leading-relaxed">
               "{episode.pullQuote}"
             </p>
             {episode.quoteAttribution && (
               <footer className="mt-6 text-[var(--text-muted)]">
-                <span className="text-sacred-gold">—</span> {episode.quoteAttribution}
+                <span className="text-[var(--color-sage)]">—</span> {episode.quoteAttribution}
               </footer>
             )}
           </blockquote>
@@ -173,7 +167,7 @@ export default function EpisodePage() {
       </section>
 
       {/* Themes section */}
-      <section className="py-16 px-6 bg-[var(--bg-secondary)] transition-colors duration-500">
+      <section className="py-16 px-6 bg-[var(--bg-secondary)]">
         <div className="max-w-4xl mx-auto">
           <motion.h2
             className="text-caption uppercase text-[var(--text-muted)] tracking-[0.2em] mb-8"
@@ -194,7 +188,7 @@ export default function EpisodePage() {
             {episode.themes.map((theme, index) => (
               <motion.span
                 key={theme}
-                className="px-4 py-2 border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-sacred-gold hover:text-sacred-gold transition-colors duration-300"
+                className="px-4 py-2 border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-[var(--color-sage)] hover:text-[var(--color-sage)] transition-colors duration-300"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -208,7 +202,7 @@ export default function EpisodePage() {
       </section>
 
       {/* Episode navigation */}
-      <section className="py-20 px-6 border-t border-[var(--border-color)] bg-[var(--bg-primary)] transition-colors duration-500">
+      <section className="py-20 px-6 border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Previous episode */}
@@ -220,14 +214,14 @@ export default function EpisodePage() {
                   </span>
                   <div className="flex items-center gap-3">
                     <svg
-                      className="w-5 h-5 text-sacred-gold transform group-hover:-translate-x-2 transition-transform duration-300"
+                      className="w-5 h-5 text-[var(--color-sage)] transform group-hover:-translate-x-2 transition-transform duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
                     </svg>
-                    <span className="font-display text-xl text-[var(--text-primary)] group-hover:text-sacred-gold transition-colors duration-300">
+                    <span className="font-display text-xl text-[var(--text-primary)] group-hover:text-[var(--color-sage)] transition-colors duration-300">
                       {prevEpisode.title}
                     </span>
                   </div>
@@ -250,11 +244,11 @@ export default function EpisodePage() {
                     Next Episode
                   </span>
                   <div className="flex items-center justify-end gap-3">
-                    <span className="font-display text-xl text-[var(--text-primary)] group-hover:text-sacred-gold transition-colors duration-300">
+                    <span className="font-display text-xl text-[var(--text-primary)] group-hover:text-[var(--color-sage)] transition-colors duration-300">
                       {nextEpisode.title}
                     </span>
                     <svg
-                      className="w-5 h-5 text-sacred-gold transform group-hover:translate-x-2 transition-transform duration-300"
+                      className="w-5 h-5 text-[var(--color-sage)] transform group-hover:translate-x-2 transition-transform duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -277,7 +271,7 @@ export default function EpisodePage() {
       </section>
 
       {/* CTA section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-[var(--bg-primary)] to-[var(--bg-secondary)] transition-colors duration-500">
+      <section className="py-20 px-6 bg-gradient-to-b from-[var(--bg-primary)] to-[var(--bg-secondary)]">
         <motion.div
           className="max-w-3xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -293,7 +287,7 @@ export default function EpisodePage() {
           </p>
           <Link
             href="/#journeys"
-            className="inline-flex items-center justify-center px-8 py-4 bg-sacred-gold text-[var(--bg-primary)] font-body text-sm uppercase tracking-widest hover:bg-transparent hover:text-sacred-gold border border-sacred-gold transition-all duration-300"
+            className="inline-flex items-center justify-center px-8 py-4 bg-[var(--color-sage)] text-white font-body text-sm uppercase tracking-widest hover:bg-transparent hover:text-[var(--color-sage)] border border-[var(--color-sage)] transition-all duration-300"
           >
             View All Episodes
           </Link>

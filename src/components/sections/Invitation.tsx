@@ -4,61 +4,58 @@ import { motion } from 'framer-motion';
 import { ScrollReveal, LineReveal } from '@/components/ui/ScrollReveal';
 import { Button } from '@/components/ui/Button';
 import { CONTENT } from '@/lib/constants';
-import { viewportSettings } from '@/lib/animations';
 
 export function Invitation() {
   return (
     <section
       id="invitation"
-      className="relative bg-[var(--bg-primary)] py-32 md:py-40 lg:py-48 transition-colors duration-500"
+      className="relative bg-[var(--bg-primary)] py-16 md:py-20"
     >
-      <div className="max-w-4xl mx-auto px-6">
-        {/* Scene marker - like end credits beginning */}
+      <div className="max-w-2xl mx-auto px-6">
+        {/* End credits marker */}
         <motion.div
-          className="text-center mb-16 md:mb-20"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center mb-10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-8 h-px bg-[var(--border-color)]" />
-            <span className="font-accent text-[0.55rem] uppercase tracking-[0.25em] text-[var(--text-muted)]">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="w-6 h-px bg-[var(--border-color)]" />
+            <span className="font-accent text-[0.5rem] uppercase tracking-[0.15em] text-[var(--text-muted)]">
               End Credits
             </span>
-            <div className="w-8 h-px bg-[var(--border-color)]" />
+            <div className="w-6 h-px bg-[var(--border-color)]" />
           </div>
         </motion.div>
 
-        {/* Partnership section - invitation not pitch */}
+        {/* Partnership */}
         <div className="text-center">
-          <ScrollReveal className="mb-10">
-            <h2 className="font-display text-xl md:text-2xl tracking-[0.15em] uppercase text-sacred-gold">
+          <ScrollReveal className="mb-6">
+            <h2 className="font-display text-section-sm tracking-[0.1em] uppercase text-[var(--color-sage)]">
               {CONTENT.invitation.header}
             </h2>
           </ScrollReveal>
 
-          {/* Statement - calm, serious */}
-          <div className="mb-14 md:mb-16">
+          <div className="mb-10">
             <LineReveal
               lines={CONTENT.invitation.lines}
-              className="space-y-2"
-              lineClassName="font-display text-lg md:text-quote-sm lg:text-quote text-[var(--text-secondary)] leading-[1.5]"
-              staggerDelay={0.18}
+              className="space-y-1"
+              lineClassName="font-display text-quote-sm md:text-quote text-[var(--text-secondary)] leading-relaxed"
+              staggerDelay={0.1}
             />
           </div>
 
-          {/* CTA - restrained, not shouty */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportSettings}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="mb-24 md:mb-32"
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="mb-16"
           >
             <Button
               variant="secondary"
-              size="lg"
+              size="md"
               href="mailto:hello@transcenddocumentary.com"
             >
               {CONTENT.invitation.cta}
@@ -66,58 +63,40 @@ export function Invitation() {
           </motion.div>
         </div>
 
-        {/* Footer - like closing credits */}
+        {/* Footer credits */}
         <motion.footer
           className="text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={viewportSettings}
-          transition={{ delay: 0.8, duration: 1.2 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.6 }}
         >
-          {/* Divider */}
-          <div className="w-12 h-px bg-[var(--border-color)] mx-auto mb-12" />
+          <div className="w-8 h-px bg-[var(--border-color)] mx-auto mb-8" />
 
-          {/* Credits block - film credit style */}
-          <div className="space-y-8">
-            {/* Presented by */}
+          <div className="space-y-5">
             <div>
-              <span className="font-accent text-[0.55rem] uppercase tracking-[0.2em] text-[var(--text-muted)] block mb-2">
+              <span className="font-accent text-[0.5rem] uppercase tracking-[0.12em] text-[var(--text-muted)] block mb-1">
                 Presented by
               </span>
-              <span className="font-display text-lg md:text-xl tracking-[0.1em] text-[var(--text-primary)]">
+              <span className="font-display text-base tracking-[0.06em] text-[var(--text-primary)]">
                 {CONTENT.invitation.footer.presented.replace('Presented by ', '')}
               </span>
             </div>
 
-            {/* Production credit */}
             <div>
-              <span className="font-accent text-[0.55rem] uppercase tracking-[0.15em] text-[var(--text-muted)]">
+              <span className="font-accent text-[0.5rem] uppercase tracking-[0.1em] text-[var(--text-muted)]">
                 {CONTENT.invitation.footer.production}
               </span>
             </div>
           </div>
 
-          {/* Copyright - quiet, subtle */}
-          <motion.p
-            className="font-accent text-[0.5rem] uppercase tracking-[0.15em] text-[var(--text-muted)] opacity-40 mt-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.4 }}
-            viewport={{ once: true }}
-            transition={{ delay: 1.5, duration: 1 }}
-          >
+          <p className="font-accent text-[0.45rem] uppercase tracking-[0.1em] text-[var(--text-muted)] opacity-50 mt-10">
             &copy; {new Date().getFullYear()} Transcend Documentary. All rights reserved.
-          </motion.p>
+          </p>
 
-          {/* Final flourish - like end of credits marker */}
-          <motion.div
-            className="flex justify-center mt-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 2, duration: 0.8 }}
-          >
-            <div className="w-1 h-1 rounded-full bg-sacred-gold/30" />
-          </motion.div>
+          <div className="flex justify-center mt-5">
+            <div className="w-1 h-1 rounded-full bg-[var(--color-sage)]/40" />
+          </div>
         </motion.footer>
       </div>
     </section>

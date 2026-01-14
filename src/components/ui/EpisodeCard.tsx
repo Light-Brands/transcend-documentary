@@ -21,7 +21,7 @@ export function EpisodeCard({ episode, index, className }: EpisodeCardProps) {
         className={cn(
           'group relative bg-[var(--card-bg)] border border-[var(--border-color)] rounded-sm',
           'transition-all duration-500 cursor-pointer h-full',
-          'hover:border-sacred-gold/30',
+          'hover:border-[var(--color-sage)]/30',
           className
         )}
         initial={{ opacity: 0, y: 30 }}
@@ -38,7 +38,7 @@ export function EpisodeCard({ episode, index, className }: EpisodeCardProps) {
       >
         {/* Top accent line - like a film slate marker */}
         <motion.div
-          className="absolute top-0 left-0 right-0 h-[1px] bg-sacred-gold origin-left"
+          className="absolute top-0 left-0 right-0 h-[1px] bg-[var(--color-sage)] origin-left"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: isHovered ? 1 : 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -46,7 +46,7 @@ export function EpisodeCard({ episode, index, className }: EpisodeCardProps) {
 
         {/* Subtle warm glow on hover */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-t from-sacred-gold/[0.03] to-transparent pointer-events-none rounded-sm"
+          className="absolute inset-0 bg-gradient-to-t from-[var(--color-sage-pale)]/50 to-transparent pointer-events-none rounded-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: isHovered ? 1 : 0 }}
           transition={{ duration: 0.4 }}
@@ -56,7 +56,7 @@ export function EpisodeCard({ episode, index, className }: EpisodeCardProps) {
         <div className="p-6 md:p-8">
           {/* Episode marker - festival style */}
           <div className="flex items-center justify-between mb-4">
-            <span className="font-accent text-[0.6rem] uppercase tracking-[0.2em] text-sacred-gold/70">
+            <span className="font-accent text-[0.6rem] uppercase tracking-[0.2em] text-[var(--color-sage)]">
               {episode.number}
             </span>
             <span className="font-accent text-[0.55rem] uppercase tracking-[0.15em] text-[var(--text-muted)]">
@@ -65,19 +65,19 @@ export function EpisodeCard({ episode, index, className }: EpisodeCardProps) {
           </div>
 
           {/* Title - like a chapter card */}
-          <h3 className="font-display text-xl md:text-2xl text-[var(--text-primary)] mb-3 group-hover:text-sacred-gold transition-colors duration-300 tracking-wide">
+          <h3 className="font-display text-xl md:text-2xl text-[var(--text-primary)] mb-3 group-hover:text-[var(--color-sage)] transition-colors duration-300 tracking-wide">
             {episode.title}
           </h3>
 
           {/* Themes - subtle */}
           <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-5">
             <span>{episode.theme}</span>
-            <span className="text-sacred-gold/50">/</span>
+            <span className="text-[var(--color-sage-muted)]">/</span>
             <span>{episode.themeSecondary}</span>
           </div>
 
           {/* Divider */}
-          <div className="w-8 h-px bg-[var(--border-color)] mb-5 transition-all duration-300 group-hover:bg-sacred-gold/40 group-hover:w-12" />
+          <div className="w-8 h-px bg-[var(--border-color)] mb-5 transition-all duration-300 group-hover:bg-[var(--color-sage)]/40 group-hover:w-12" />
 
           {/* Hook - the logline */}
           <p className="text-body-sm text-[var(--text-secondary)] leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-300">
@@ -101,7 +101,7 @@ export function EpisodeCard({ episode, index, className }: EpisodeCardProps) {
 
           {/* Explore indicator - restrained */}
           <motion.div
-            className="flex items-center gap-2 mt-5 text-sacred-gold"
+            className="flex items-center gap-2 mt-5 text-[var(--color-sage)]"
             initial={{ opacity: 0, x: -8 }}
             animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -8 }}
             transition={{ duration: 0.3, delay: 0.1 }}

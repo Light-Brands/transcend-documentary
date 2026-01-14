@@ -3,95 +3,58 @@
 import { motion } from 'framer-motion';
 import { ScrollReveal, LineReveal } from '@/components/ui/ScrollReveal';
 import { CONTENT } from '@/lib/constants';
-import { viewportSettings } from '@/lib/animations';
 
 export function Catalyst() {
   return (
     <section
       id="catalyst"
-      className="relative bg-[var(--bg-secondary)] py-32 md:py-40 lg:py-48 transition-colors duration-500"
+      className="relative bg-[var(--bg-secondary)] py-16 md:py-20"
     >
-      {/* Chapter marker - like a film chapter card */}
+      {/* Chapter marker */}
       <motion.div
-        className="text-center mb-16 md:mb-20"
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.8 }}
+        className="text-center mb-10"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
       >
-        <span className="font-accent text-[0.65rem] tracking-[0.25em] uppercase text-sacred-gold/70">
+        <span className="font-accent text-[0.55rem] tracking-[0.15em] uppercase text-[var(--color-sage)]">
           The Pilot Episode
         </span>
       </motion.div>
 
-      {/* First part - Portrait and intro quote */}
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Portrait placeholder - cinematic frame */}
+      {/* Portrait and quote */}
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          {/* Portrait */}
           <ScrollReveal className="order-2 lg:order-1">
-            <div className="relative">
-              {/* Frame border - film still aesthetic */}
-              <div className="absolute -inset-3 border border-[var(--border-color)] opacity-30" />
-
-              <div className="relative aspect-[3/4] bg-gradient-to-br from-[var(--bg-tertiary)] via-[var(--bg-secondary)] to-[var(--bg-primary)] overflow-hidden transition-colors duration-500">
-                {/* Ambient glow effect */}
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  animate={{
-                    opacity: [0.3, 0.5, 0.3],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                >
-                  <div className="w-3/4 h-3/4 rounded-full bg-ember/10 blur-3xl" />
-                </motion.div>
-
-                {/* Placeholder silhouette */}
+            <div className="relative max-w-sm mx-auto lg:max-w-none">
+              <div className="relative aspect-[3/4] bg-gradient-to-br from-[var(--bg-tertiary)] to-[var(--bg-primary)] rounded-sm overflow-hidden">
                 <div className="absolute inset-0 flex items-end justify-center">
-                  <div className="w-2/3 h-4/5 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-tertiary)]/50 to-transparent rounded-t-full transition-colors duration-500" />
+                  <div className="w-2/3 h-4/5 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-tertiary)]/50 to-transparent rounded-t-full" />
                 </div>
-
-                {/* Side light effect - like interview lighting */}
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-ember/15 to-transparent" />
-
-                {/* Film grain hint */}
-                <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence baseFrequency=%220.9%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22/%3E%3C/svg%3E')]" />
+                <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l from-[var(--color-sage-pale)]/20 to-transparent" />
               </div>
-
-              {/* Caption below portrait - documentary style */}
-              <motion.div
-                className="mt-4 text-center"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={viewportSettings}
-                transition={{ delay: 0.8, duration: 0.6 }}
-              >
-                <span className="font-accent text-[0.6rem] uppercase tracking-[0.2em] text-[var(--text-muted)]">
-                  Nicholas — The Catalyst
-                </span>
-              </motion.div>
+              <p className="mt-3 text-center font-accent text-[0.5rem] uppercase tracking-[0.15em] text-[var(--text-muted)]">
+                Nicholas — The Catalyst
+              </p>
             </div>
           </ScrollReveal>
 
-          {/* Quote - intimate interview feel */}
+          {/* Quote */}
           <div className="order-1 lg:order-2">
             <LineReveal
               lines={CONTENT.catalyst.intro.lines}
-              className="space-y-1"
-              lineClassName="font-display italic text-quote-sm md:text-quote text-[var(--text-secondary)] leading-[1.5]"
-              staggerDelay={0.12}
+              className="space-y-0.5"
+              lineClassName="font-display italic text-quote-sm md:text-quote text-[var(--text-secondary)] leading-relaxed"
+              staggerDelay={0.1}
             />
-
-            {/* Attribution */}
             <motion.p
-              className="font-display text-lg md:text-xl text-sacred-gold mt-10"
+              className="font-display text-base text-[var(--color-sage)] mt-6"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={viewportSettings}
-              transition={{ delay: 1.2, duration: 0.8 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8, duration: 0.5 }}
             >
               {CONTENT.catalyst.intro.attribution}
             </motion.p>
@@ -99,24 +62,24 @@ export function Catalyst() {
         </div>
       </div>
 
-      {/* Scene divider */}
+      {/* Divider */}
       <motion.div
-        className="max-w-xs mx-auto my-24 md:my-32"
+        className="max-w-[120px] mx-auto my-14"
         initial={{ opacity: 0, scaleX: 0 }}
         whileInView={{ opacity: 1, scaleX: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 1, delay: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="scene-divider" />
       </motion.div>
 
-      {/* Second part - Continuation (the calling) */}
-      <div className="max-w-4xl mx-auto px-6 text-center">
+      {/* Continuation */}
+      <div className="max-w-2xl mx-auto px-6 text-center">
         <LineReveal
           lines={CONTENT.catalyst.continuation.lines}
-          className="space-y-2"
-          lineClassName="font-display text-quote-sm md:text-quote lg:text-quote-lg text-[var(--text-primary)] leading-[1.4]"
-          staggerDelay={0.2}
+          className="space-y-1"
+          lineClassName="font-display text-quote-sm md:text-quote text-[var(--text-primary)] leading-relaxed"
+          staggerDelay={0.12}
         />
       </div>
     </section>

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { ThemeProvider } from '@/context/ThemeContext';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -13,13 +12,11 @@ export const metadata: Metadata = {
     'mental health',
     'addiction recovery',
     'transcend clinic',
-    'psychedelic therapy',
   ],
   authors: [{ name: 'Light Brands Collective' }],
   openGraph: {
     title: 'Transcend Documentary | Bringing the Lost Traveler Back Home',
-    description:
-      'A cinematic documentary series about human transformation.',
+    description: 'A cinematic documentary series about human transformation.',
     type: 'website',
     locale: 'en_US',
   },
@@ -40,36 +37,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="light" suppressHydrationWarning>
+    <html lang="en">
       <head>
-        {/* Google Fonts - loaded via link tags for production reliability */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Source+Sans+3:wght@300;400;500&family=Special+Elite&display=swap"
           rel="stylesheet"
         />
-        {/* Prevent flash of wrong theme */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme');
-                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.remove('light');
-                    document.documentElement.classList.add('dark');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
       </head>
       <body className="antialiased">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );

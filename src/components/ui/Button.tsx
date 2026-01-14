@@ -13,15 +13,15 @@ interface ButtonProps extends HTMLMotionProps<'button'> {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', children, href, ...props }, ref) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-body tracking-widest uppercase transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-sacred-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]';
+      'inline-flex items-center justify-center font-body tracking-widest uppercase transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-sage)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]';
 
     const variants = {
       primary:
-        'bg-sacred-gold text-[var(--bg-primary)] border border-sacred-gold hover:bg-transparent hover:text-sacred-gold',
+        'bg-[var(--color-sage)] text-white border border-[var(--color-sage)] hover:bg-transparent hover:text-[var(--color-sage)]',
       secondary:
-        'bg-transparent text-sacred-gold border border-sacred-gold hover:bg-sacred-gold hover:text-[var(--bg-primary)]',
+        'bg-transparent text-[var(--color-sage)] border border-[var(--color-sage)] hover:bg-[var(--color-sage)] hover:text-white',
       ghost:
-        'bg-transparent text-[var(--text-primary)] border border-transparent hover:text-sacred-gold',
+        'bg-transparent text-[var(--text-primary)] border border-transparent hover:text-[var(--color-sage)]',
     };
 
     const sizes = {

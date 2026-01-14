@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { useTheme } from '@/context/ThemeContext';
 
 interface VideoLoopProps {
   src?: string;
@@ -69,7 +68,7 @@ export function VideoLoop({
         >
           {/* Animated ambient glow */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-32 h-32 rounded-full bg-sacred-gold/10 blur-3xl animate-pulse" />
+            <div className="w-32 h-32 rounded-full bg-[var(--color-sage-pale)] blur-3xl animate-pulse" />
           </div>
         </motion.div>
       )}
@@ -120,11 +119,9 @@ export function VideoBackground({
   overlayOpacity = 0.6,
 }: VideoBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
 
-  // Colors for overlay based on theme
-  const overlayColor = isDark ? '10, 10, 10' : '250, 250, 250';
+  // Light mode overlay color
+  const overlayColor = '250, 250, 250';
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
@@ -146,7 +143,7 @@ export function VideoBackground({
           {/* Ambient animated elements for placeholder */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div
-              className="w-96 h-96 rounded-full bg-sacred-gold/5 blur-3xl"
+              className="w-96 h-96 rounded-full bg-[var(--color-sage-pale)]/50 blur-3xl"
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.3, 0.5, 0.3],
