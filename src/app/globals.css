@@ -8,15 +8,28 @@
    =================================== */
 
 :root {
-  /* Static Color Palette (reference values) */
+  /* Static Color Palette - Cinematic & Alive */
   --color-void-black: #0A0A0A;
+  --color-obsidian: #080808;
   --color-ash: #1A1A1A;
   --color-smoke: #2D2D2D;
   --color-mist: #8A8A8A;
   --color-cloud: #C9C9C9;
   --color-light: #F5F5F5;
+  --color-bone: #E8E4DC;
   --color-sacred-gold: #C9A962;
+  --color-muted-gold: #A89060;
   --color-ember: #D4A574;
+
+  /* Deep forest green - ancient, nervous system */
+  --color-forest-deep: #0D1A14;
+  --color-forest: #1A2F25;
+  --color-forest-light: #2A4035;
+
+  /* Shadow blues - night-before-revelation */
+  --color-shadow-blue-deep: #0A1015;
+  --color-shadow-blue: #151D24;
+  --color-shadow-blue-light: #1E2A33;
 
   /* Warm transition colors */
   --color-warmth-1: #0d0c0a;
@@ -445,51 +458,135 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ===================================
-   BUTTONS
+   BUTTONS - Ceremonial, not clickable
    =================================== */
 
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2.5rem;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
+  padding: 1.25rem 3rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
   font-weight: 400;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-void-black);
-  background-color: var(--color-sacred-gold);
-  border: 1px solid var(--color-sacred-gold);
+  background-color: var(--color-muted-gold);
+  border: 1px solid var(--color-muted-gold);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-sacred-gold) 0%, var(--color-ember) 100%);
+  opacity: 0;
+  transition: opacity 600ms ease;
 }
 
 .btn-primary:hover {
   background-color: transparent;
   color: var(--color-sacred-gold);
+  border-color: var(--color-sacred-gold);
+  letter-spacing: 0.25em;
+}
+
+.btn-primary:hover::before {
+  opacity: 0;
 }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2.5rem;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
+  padding: 1.25rem 3rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
   font-weight: 400;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-sacred-gold);
+  color: var(--color-muted-gold);
   background-color: transparent;
-  border: 1px solid var(--color-sacred-gold);
+  border: 1px solid var(--color-muted-gold);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+
+.btn-secondary::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--color-sacred-gold);
+  transition: width 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .btn-secondary:hover {
-  background-color: var(--color-sacred-gold);
-  color: var(--color-void-black);
+  color: var(--color-sacred-gold);
+  border-color: var(--color-sacred-gold);
+  letter-spacing: 0.25em;
+}
+
+.btn-secondary:hover::after {
+  width: 60%;
+}
+
+/* Ceremonial button variant */
+.btn-ceremonial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 3.5rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-bone);
+  background: transparent;
+  border: 1px solid var(--color-smoke);
+  cursor: pointer;
+  transition: all 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+
+.btn-ceremonial::before,
+.btn-ceremonial::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 1px;
+  background: var(--color-muted-gold);
+  transition: all 600ms ease;
+}
+
+.btn-ceremonial::before {
+  left: 1rem;
+}
+
+.btn-ceremonial::after {
+  right: 1rem;
+}
+
+.btn-ceremonial:hover {
+  color: var(--color-sacred-gold);
+  border-color: var(--color-muted-gold);
+}
+
+.btn-ceremonial:hover::before,
+.btn-ceremonial:hover::after {
+  width: 16px;
+  background: var(--color-sacred-gold);
 }
 
 /* ===================================

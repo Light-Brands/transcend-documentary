@@ -11,15 +11,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Core Palette from Website Spec
+        // Core Palette - Cinematic & Alive
         'void-black': '#0A0A0A',
+        'obsidian': '#080808',
         'ash': '#1A1A1A',
         'smoke': '#2D2D2D',
         'mist': '#8A8A8A',
         'cloud': '#C9C9C9',
         'light': '#F5F5F5',
+        'bone': '#E8E4DC',
+        // Accent colors - for meaning, never decoration
         'sacred-gold': '#C9A962',
         'ember': '#D4A574',
+        'muted-gold': '#A89060',
+        // Deep forest green - ancient, nervous system
+        'forest': {
+          deep: '#0D1A14',
+          DEFAULT: '#1A2F25',
+          light: '#2A4035',
+        },
+        // Shadow blues - night-before-revelation
+        'shadow-blue': {
+          deep: '#0A1015',
+          DEFAULT: '#151D24',
+          light: '#1E2A33',
+        },
         // Warm transition colors
         'warmth': {
           1: '#0d0c0a',
@@ -57,8 +73,12 @@ const config: Config = {
       animation: {
         'fade-up': 'fadeUp 0.8s ease-out forwards',
         'fade-in': 'fadeIn 1s ease-out forwards',
+        'fade-in-slow': 'fadeIn 2s ease-out forwards',
         'pulse-slow': 'pulseSlow 3s ease-in-out infinite',
         'scroll-hint': 'scrollHint 2s ease-in-out infinite',
+        'breathe': 'breathe 6s ease-in-out infinite',
+        'kinetic-in': 'kineticIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+        'letter-space': 'letterSpace 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
       },
       keyframes: {
         fadeUp: {
@@ -76,6 +96,18 @@ const config: Config = {
         scrollHint: {
           '0%, 100%': { transform: 'translateY(0)', opacity: '0.6' },
           '50%': { transform: 'translateY(8px)', opacity: '1' },
+        },
+        breathe: {
+          '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+          '50%': { opacity: '0.7', transform: 'scale(1.02)' },
+        },
+        kineticIn: {
+          '0%': { opacity: '0', transform: 'translateY(40px)', letterSpacing: '0.4em' },
+          '100%': { opacity: '1', transform: 'translateY(0)', letterSpacing: '0.15em' },
+        },
+        letterSpace: {
+          '0%': { letterSpacing: '0.5em', opacity: '0' },
+          '100%': { letterSpacing: '0.2em', opacity: '1' },
         },
       },
       backgroundImage: {

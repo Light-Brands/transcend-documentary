@@ -10,9 +10,12 @@ export function Invitation() {
   return (
     <section
       id="invitation"
-      className="relative bg-[var(--bg-primary)] py-32 md:py-40 lg:py-48 transition-colors duration-500"
+      className="relative py-32 md:py-40 lg:py-48 overflow-hidden"
     >
-      <div className="max-w-4xl mx-auto px-6">
+      {/* Background - subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-void-black via-ash to-void-black transition-colors duration-500" />
+
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
         {/* Scene marker - like end credits beginning */}
         <motion.div
           className="text-center mb-16 md:mb-20"
@@ -22,11 +25,11 @@ export function Invitation() {
           transition={{ duration: 0.8 }}
         >
           <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-8 h-px bg-[var(--border-color)]" />
-            <span className="font-accent text-[0.55rem] uppercase tracking-[0.25em] text-[var(--text-muted)]">
+            <div className="w-8 h-px bg-smoke/40" />
+            <span className="font-accent text-[0.55rem] uppercase tracking-[0.25em] text-mist/50">
               End Credits
             </span>
-            <div className="w-8 h-px bg-[var(--border-color)]" />
+            <div className="w-8 h-px bg-smoke/40" />
           </div>
         </motion.div>
 
@@ -43,18 +46,18 @@ export function Invitation() {
             <LineReveal
               lines={CONTENT.invitation.lines}
               className="space-y-2"
-              lineClassName="font-display text-lg md:text-quote-sm lg:text-quote text-[var(--text-secondary)] leading-[1.5]"
+              lineClassName="font-display text-lg md:text-quote-sm lg:text-quote text-bone/70 leading-[1.5]"
               staggerDelay={0.18}
             />
           </div>
 
-          {/* CTA - restrained, not shouty */}
+          {/* CTA - ceremonial, not shouty */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportSettings}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="mb-24 md:mb-32"
+            className="mb-20 md:mb-24"
           >
             <Button
               variant="secondary"
@@ -64,6 +67,19 @@ export function Invitation() {
               {CONTENT.invitation.cta}
             </Button>
           </motion.div>
+
+          {/* Ecosystem signal - subtle but important */}
+          <motion.div
+            className="mb-20 md:mb-24"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, delay: 0.8 }}
+          >
+            <p className="font-body text-sm md:text-base text-mist/40 leading-relaxed max-w-2xl mx-auto italic">
+              {CONTENT.ecosystem.line}
+            </p>
+          </motion.div>
         </div>
 
         {/* Footer - like closing credits */}
@@ -72,26 +88,26 @@ export function Invitation() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={viewportSettings}
-          transition={{ delay: 0.8, duration: 1.2 }}
+          transition={{ delay: 1, duration: 1.2 }}
         >
           {/* Divider */}
-          <div className="w-12 h-px bg-[var(--border-color)] mx-auto mb-12" />
+          <div className="w-12 h-px bg-smoke/30 mx-auto mb-12" />
 
           {/* Credits block - film credit style */}
           <div className="space-y-8">
             {/* Presented by */}
             <div>
-              <span className="font-accent text-[0.55rem] uppercase tracking-[0.2em] text-[var(--text-muted)] block mb-2">
+              <span className="font-accent text-[0.55rem] uppercase tracking-[0.2em] text-mist/40 block mb-2">
                 Presented by
               </span>
-              <span className="font-display text-lg md:text-xl tracking-[0.1em] text-[var(--text-primary)]">
-                {CONTENT.invitation.footer.presented.replace('Presented by ', '')}
+              <span className="font-display text-lg md:text-xl tracking-[0.1em] text-bone/80">
+                {CONTENT.invitation.footer.presented}
               </span>
             </div>
 
             {/* Production credit */}
             <div>
-              <span className="font-accent text-[0.55rem] uppercase tracking-[0.15em] text-[var(--text-muted)]">
+              <span className="font-accent text-[0.55rem] uppercase tracking-[0.15em] text-mist/40">
                 {CONTENT.invitation.footer.production}
               </span>
             </div>
@@ -99,9 +115,9 @@ export function Invitation() {
 
           {/* Copyright - quiet, subtle */}
           <motion.p
-            className="font-accent text-[0.5rem] uppercase tracking-[0.15em] text-[var(--text-muted)] opacity-40 mt-16"
+            className="font-accent text-[0.5rem] uppercase tracking-[0.15em] text-mist/30 mt-16"
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.4 }}
+            whileInView={{ opacity: 0.3 }}
             viewport={{ once: true }}
             transition={{ delay: 1.5, duration: 1 }}
           >
@@ -116,7 +132,7 @@ export function Invitation() {
             viewport={{ once: true }}
             transition={{ delay: 2, duration: 0.8 }}
           >
-            <div className="w-1 h-1 rounded-full bg-sacred-gold/30" />
+            <div className="w-1 h-1 rounded-full bg-muted-gold/30" />
           </motion.div>
         </motion.footer>
       </div>
