@@ -27,6 +27,11 @@
   /* Typography */
   --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
   --font-body: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+  --font-accent: 'Special Elite', 'Courier New', monospace;
+
+  /* Header heights for scroll offset */
+  --header-height: 80px;
+  --header-height-scrolled: 64px;
 
   /* Spacing */
   --section-padding: clamp(4rem, 10vh, 8rem);
@@ -166,6 +171,53 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
+/* Accent font - typewriter/screenplay style */
+.font-accent {
+  font-family: var(--font-accent);
+  letter-spacing: 0.05em;
+}
+
+/* Chapter marker styling - like screenplay scene headers */
+.chapter-marker {
+  font-family: var(--font-accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Scene divider - thin elegant line */
+.scene-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border-color) 20%,
+    var(--border-color) 80%,
+    transparent 100%
+  );
+}
+
+/* Act transition marker */
+.act-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-accent);
+  font-size: 0.6875rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.act-marker::before,
+.act-marker::after {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background: var(--border-color);
+}
+
 /* ===================================
    SECTION STYLES
    =================================== */
@@ -287,6 +339,109 @@ h1, h2, h3, h4, h5, h6 {
     rgba(250, 250, 250, 0.6) 50%,
     rgba(250, 250, 250, 0.85) 100%
   );
+}
+
+/* ===================================
+   HEADER & NAVIGATION
+   =================================== */
+
+.header-utility-bar {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  transition: all var(--transition-medium);
+}
+
+.header-main {
+  background: var(--bg-primary);
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-medium);
+}
+
+.header-scrolled .header-main {
+  border-bottom-color: var(--border-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.light .header-scrolled .header-main {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Navigation dropdown */
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  min-width: 220px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item:hover .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-item {
+  display: block;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+}
+
+.nav-dropdown-item:hover {
+  background: var(--bg-secondary);
+  color: var(--color-sacred-gold);
+}
+
+/* Mobile navigation */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-primary);
+  z-index: 100;
+  transform: translateX(100%);
+  transition: transform var(--transition-medium);
+}
+
+.mobile-nav.open {
+  transform: translateX(0);
+}
+
+.mobile-nav-accordion {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-nav-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.mobile-nav-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-medium);
+}
+
+.mobile-nav-accordion.open .mobile-nav-accordion-content {
+  max-height: 300px;
 }
 
 /* ===================================

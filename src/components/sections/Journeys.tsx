@@ -9,91 +9,101 @@ export function Journeys() {
   return (
     <section
       id="journeys"
-      className="relative py-24 md:py-32 lg:py-40 overflow-hidden"
+      className="relative py-32 md:py-40 lg:py-48 overflow-hidden"
     >
-      {/* Background gradient - dark to warm transition */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--warmth-2,#141311)] to-[var(--warmth-3,#1a1815)] transition-colors duration-500" />
+      {/* Background gradient - warm transition zone */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--warmth-1)] via-[var(--warmth-2,#141311)] to-[var(--warmth-3,#1a1815)] transition-colors duration-500" />
 
-      {/* Subtle warm light glow from bottom */}
+      {/* Subtle warm ambient light */}
       <motion.div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200%] h-[60%] pointer-events-none"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200%] h-[50%] pointer-events-none"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 1.5 }}
+        transition={{ duration: 2 }}
       >
-        <div className="w-full h-full bg-gradient-radial from-sacred-gold/[0.03] via-ember/[0.02] to-transparent" />
+        <div className="w-full h-full bg-gradient-radial from-sacred-gold/[0.025] via-ember/[0.015] to-transparent" />
       </motion.div>
 
-      {/* Decorative light rays */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[var(--bg-primary)] to-transparent pointer-events-none transition-colors duration-500" />
-
       <div className="relative max-w-7xl mx-auto px-6">
-        {/* Section header with enhanced styling */}
-        <ScrollReveal className="text-center mb-8">
+        {/* Festival-style header - like a program section */}
+        <div className="text-center mb-16 md:mb-20">
+          {/* Scene marker */}
           <motion.div
-            className="inline-block"
-            whileInView={{ scale: [0.95, 1] }}
+            className="mb-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
-            <span className="text-caption uppercase text-sacred-gold tracking-[0.3em]">
-              {CONTENT.journeys.header}
+            <span className="font-accent text-[0.6rem] uppercase tracking-[0.25em] text-[var(--text-muted)]">
+              Official Selection
             </span>
           </motion.div>
-        </ScrollReveal>
 
-        {/* Decorative divider */}
-        <motion.div
-          className="flex items-center justify-center gap-4 mb-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <div className="h-px w-16 bg-gradient-to-r from-transparent to-sacred-gold/40" />
-          <div className="w-2 h-2 bg-sacred-gold/60 rotate-45" />
-          <div className="h-px w-16 bg-gradient-to-l from-transparent to-sacred-gold/40" />
-        </motion.div>
+          {/* Main header - film festival style */}
+          <ScrollReveal>
+            <h2 className="font-display text-xl md:text-2xl lg:text-3xl tracking-[0.15em] uppercase text-sacred-gold mb-6">
+              {CONTENT.journeys.header}
+            </h2>
+          </ScrollReveal>
 
-        {/* Intro text with warmer styling */}
+          {/* Elegant divider - like a festival program element */}
+          <motion.div
+            className="flex items-center justify-center gap-3 mb-12"
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <div className="h-px w-12 bg-[var(--border-color)]" />
+            <div className="w-1 h-1 rounded-full bg-sacred-gold/50" />
+            <div className="h-px w-12 bg-[var(--border-color)]" />
+          </motion.div>
+        </div>
+
+        {/* Intro text - documentary series premise */}
         <div className="max-w-3xl mx-auto text-center mb-20 md:mb-28">
           <LineReveal
             lines={CONTENT.journeys.intro}
             className="space-y-3"
-            lineClassName="font-display text-section-sm md:text-section text-[var(--text-secondary)] opacity-90"
-            staggerDelay={0.15}
+            lineClassName="font-display text-lg md:text-section-sm lg:text-section text-[var(--text-secondary)] leading-[1.4]"
+            staggerDelay={0.18}
           />
         </div>
 
-        {/* Episode cards grid with warm ambient glow */}
-        <div className="relative">
-          {/* Subtle ambient glow behind cards */}
-          <motion.div
-            className="absolute inset-0 -inset-x-8 -inset-y-12 pointer-events-none"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            <div className="w-full h-full bg-gradient-radial from-sacred-gold/[0.02] via-transparent to-transparent" />
-          </motion.div>
+        {/* Episode counter - festival program style */}
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="font-accent text-[0.6rem] uppercase tracking-[0.2em] text-[var(--text-muted)]">
+            6 Episodes
+          </span>
+        </motion.div>
 
+        {/* Episode cards grid - festival program panels */}
+        <div className="relative">
           <EpisodeGrid episodes={EPISODES} />
         </div>
 
-        {/* Bottom flourish */}
+        {/* Bottom flourish - quiet invitation */}
         <motion.div
-          className="mt-20 flex items-center justify-center"
-          initial={{ opacity: 0, y: 20 }}
+          className="mt-20 md:mt-24 flex items-center justify-center"
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
         >
           <div className="flex items-center gap-3 text-[var(--text-muted)]">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[var(--bg-tertiary)]" />
-            <span className="text-caption-sm uppercase tracking-widest">Click to explore each story</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[var(--bg-tertiary)]" />
+            <div className="h-px w-8 bg-[var(--border-color)] opacity-50" />
+            <span className="font-accent text-[0.6rem] uppercase tracking-[0.2em] opacity-70">
+              Click to explore each story
+            </span>
+            <div className="h-px w-8 bg-[var(--border-color)] opacity-50" />
           </div>
         </motion.div>
       </div>
