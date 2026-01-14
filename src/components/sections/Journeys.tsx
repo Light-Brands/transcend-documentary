@@ -90,9 +90,19 @@ export function Journeys() {
           <EpisodeGrid episodes={EPISODES} />
         </div>
 
+        {/* Series Close Line */}
+        <div className="mt-20 md:mt-28 text-center">
+          <LineReveal
+            lines={CONTENT.journeys.closeLine}
+            className="space-y-2"
+            lineClassName="font-display text-lg md:text-xl lg:text-2xl text-sacred-gold/90 leading-[1.4] tracking-wide"
+            staggerDelay={0.25}
+          />
+        </div>
+
         {/* Bottom flourish - quiet invitation */}
         <motion.div
-          className="mt-20 md:mt-24 flex items-center justify-center"
+          className="mt-16 md:mt-20 flex items-center justify-center"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
