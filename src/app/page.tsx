@@ -4,6 +4,7 @@ import { useRef, useEffect, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Header } from '@/components/ui';
 import { CONTENT, CHARACTERS, EPISODES, Episode } from '@/lib/constants';
 
@@ -27,6 +28,7 @@ export default function Home() {
         <BlackoutV2 />
         <TruthV2 />
         <ContainerV2 />
+        <PostcardGallery />
         <EpisodesV2 />
         <PromiseV2 />
         <InvitationV2 />
@@ -688,6 +690,249 @@ function ContainerV2() {
           </div>
         </div>
       </div>
+    </section>
+  );
+}
+
+// ============================================
+// POSTCARD GALLERY - Horizontal scroll carousel
+// Postcards sweep across screen as user scrolls
+// ============================================
+function PostcardGallery() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const postcardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Each postcard has unique rotation and vertical offset for organic feel
+  const postcardConfigs = [
+    { rotation: -6, yOffset: 20 },
+    { rotation: 4, yOffset: -15 },
+    { rotation: -3, yOffset: 35 },
+    { rotation: 7, yOffset: -25 },
+    { rotation: -5, yOffset: 10 },
+    { rotation: 3, yOffset: -30 },
+  ];
+
+  useIsomorphicLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const track = trackRef.current;
+      const postcards = postcardsRef.current.filter(Boolean);
+      const header = document.querySelector('.postcard-header');
+
+      if (!track) return;
+
+      // Calculate the scroll distance needed
+      const trackWidth = track.scrollWidth;
+      const viewportWidth = window.innerWidth;
+      const scrollDistance = trackWidth - viewportWidth + 200; // Extra padding
+
+      // Header reveal
+      gsap.fromTo(header,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+
+      // Set initial state for postcards - scattered, tilted
+      postcards.forEach((postcard, i) => {
+        const config = postcardConfigs[i];
+        gsap.set(postcard, {
+          rotation: config.rotation,
+          y: config.yOffset,
+          opacity: 0,
+          scale: 0.9,
+        });
+      });
+
+      // Postcards fade in with stagger
+      gsap.to(postcards, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 70%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      // Main horizontal scroll animation - pinned section
+      gsap.to(track, {
+        x: -scrollDistance,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: `+=${scrollDistance * 1.5}`,
+          pin: true,
+          scrub: 0.8,
+          anticipatePin: 1,
+        },
+      });
+
+      // Individual postcard parallax - each moves at different speeds for depth
+      postcards.forEach((postcard, i) => {
+        const config = postcardConfigs[i];
+        const parallaxFactor = 0.85 + (i * 0.03); // Subtle variation
+        const rotationDrift = config.rotation > 0 ? -4 : 4;
+
+        gsap.to(postcard, {
+          rotation: config.rotation + rotationDrift,
+          y: config.yOffset + (i % 2 === 0 ? 30 : -30),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: `+=${scrollDistance * 1.5}`,
+            scrub: parallaxFactor,
+          },
+        });
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative h-screen overflow-hidden bg-[var(--bg-primary)]"
+    >
+      {/* Header - fixed at top during scroll */}
+      <div className="postcard-header absolute top-8 sm:top-12 md:top-16 left-0 right-0 z-10 text-center px-4 opacity-0">
+        <span className="text-[10px] sm:text-xs tracking-[0.3em] text-sacred-gold-text uppercase mb-3 block font-medium">
+          Six Stories
+        </span>
+        <h2 className="font-display text-xl sm:text-2xl md:text-3xl tracking-[0.1em] text-[var(--text-primary)]">
+          THE COLLECTION
+        </h2>
+      </div>
+
+      {/* Horizontal scrolling track */}
+      <div
+        ref={trackRef}
+        className="absolute top-1/2 -translate-y-1/2 left-0 flex items-center gap-8 sm:gap-12 md:gap-16 lg:gap-20 pl-[10vw] pr-[20vw]"
+      >
+        {EPISODES.map((episode, i) => (
+          <Link
+            key={episode.id}
+            href={`/episodes/${episode.id}`}
+            className="block flex-shrink-0"
+          >
+            <div
+              ref={(el) => { postcardsRef.current[i] = el; }}
+              className="postcard w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]
+                         cursor-pointer group"
+            >
+              {/* Postcard Frame - vintage cream paper look */}
+              <div className="relative bg-[#f8f6f1] p-3 sm:p-4
+                            shadow-[0_8px_30px_rgba(0,0,0,0.12),0_4px_8px_rgba(0,0,0,0.06)]
+                            transition-all duration-500 ease-out
+                            group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.2),0_8px_20px_rgba(0,0,0,0.1)]
+                            group-hover:-translate-y-4 group-hover:rotate-0 group-hover:scale-[1.02]">
+
+                {/* Image Container - maintains 1344:768 aspect ratio */}
+                <div className="relative aspect-[1344/768] overflow-hidden bg-[#e8e4db]">
+                  <Image
+                    src={`/episode-${i + 1}.png`}
+                    alt={episode.title}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out
+                             group-hover:scale-110"
+                    sizes="(max-width: 640px) 260px, (max-width: 768px) 300px, (max-width: 1024px) 340px, 380px"
+                  />
+                  {/* Cinematic gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent
+                                opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+
+                  {/* Episode number overlay */}
+                  <div className="absolute top-3 left-3 px-2 py-1 bg-black/60 backdrop-blur-sm">
+                    <span className="text-[10px] sm:text-xs tracking-[0.2em] text-white/90 uppercase font-medium">
+                      {episode.number}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Postcard Caption - handwritten feel */}
+                <div className="mt-3 sm:mt-4 px-1">
+                  <h3 className="font-display text-sm sm:text-base md:text-lg text-[#2a2520] tracking-wide leading-tight mb-2">
+                    {episode.title}
+                  </h3>
+                  <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-[#8a7355] uppercase tracking-wider">
+                    <span>{episode.theme}</span>
+                    <span className="w-1 h-1 rounded-full bg-[#c9a962]" />
+                    <span>{episode.themeSecondary}</span>
+                  </div>
+                </div>
+
+                {/* Vintage corner accents */}
+                <div className="absolute top-1.5 left-1.5 w-3 h-3 border-l-2 border-t-2 border-[#d4c9b8]/60" />
+                <div className="absolute top-1.5 right-1.5 w-3 h-3 border-r-2 border-t-2 border-[#d4c9b8]/60" />
+                <div className="absolute bottom-1.5 left-1.5 w-3 h-3 border-l-2 border-b-2 border-[#d4c9b8]/60" />
+                <div className="absolute bottom-1.5 right-1.5 w-3 h-3 border-r-2 border-b-2 border-[#d4c9b8]/60" />
+
+                {/* Film sprocket holes along sides */}
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col gap-2 opacity-30">
+                  {[...Array(3)].map((_, j) => (
+                    <div key={j} className="w-2 h-3 rounded-sm bg-[#2a2520]" />
+                  ))}
+                </div>
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 flex flex-col gap-2 opacity-30">
+                  {[...Array(3)].map((_, j) => (
+                    <div key={j} className="w-2 h-3 rounded-sm bg-[#2a2520]" />
+                  ))}
+                </div>
+              </div>
+
+              {/* Postcard shadow (separate for depth effect) */}
+              <div className="absolute -bottom-3 left-4 right-4 h-6 bg-black/8 blur-xl rounded-full
+                            transition-all duration-500 group-hover:-bottom-6 group-hover:blur-2xl group-hover:bg-black/12" />
+            </div>
+          </Link>
+        ))}
+
+        {/* End marker */}
+        <div className="flex-shrink-0 flex flex-col items-center justify-center w-[200px] h-[200px] opacity-50">
+          <div className="w-px h-16 bg-gradient-to-b from-transparent via-sacred-gold/50 to-transparent mb-4" />
+          <span className="text-xs tracking-[0.3em] text-[var(--text-muted)] uppercase">
+            Continue
+          </span>
+          <svg className="w-5 h-5 mt-3 text-sacred-gold/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Scroll progress indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2">
+        <span className="text-[10px] tracking-[0.2em] text-[var(--text-muted)] uppercase">
+          Scroll
+        </span>
+        <div className="w-8 h-px bg-[var(--border-color)]" />
+        <svg className="w-4 h-4 text-[var(--text-muted)] animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </div>
+
+      {/* Film grain texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }}
+      />
     </section>
   );
 }
