@@ -108,85 +108,87 @@ function FilmBars() {
 }
 
 // ============================================
-// HERO V2 - Cinematic documentary opening
-// Film-inspired with screenplay aesthetics
+// HERO V2 - Elegant, image-driven documentary opening
+// Inspired by inwavesandwarfilm.com - restrained and cinematic
 // ============================================
 function HeroV2() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [showCursor, setShowCursor] = useState(true);
-
-  // Blinking cursor effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 530);
-    return () => clearInterval(interval);
-  }, []);
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Cinematic opening timeline (without film bars)
-      const tl = gsap.timeline({ delay: 0.5 });
+      // Elegant, measured opening timeline
+      const tl = gsap.timeline({ delay: 0.3 });
 
-      // Production company fades in
-      tl.fromTo('.hero-production',
-        { opacity: 0 },
-        { opacity: 1, duration: 0.6, ease: 'power2.out' }
+      // Background image reveals first
+      tl.fromTo('.hero-bg-image',
+        { scale: 1.1, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1.5, ease: 'power2.out' }
       )
-      // Film metadata appears
-      .fromTo('.hero-meta',
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-        '-=0.2'
-      )
-      // Scene header types in
-      .fromTo('.hero-scene',
-        { opacity: 0 },
-        { opacity: 1, duration: 0.3 },
-        '+=0.3'
-      )
-      // Main title reveals dramatically
-      .fromTo('.hero-title-line',
-        { opacity: 0, y: 40, letterSpacing: '0.3em' },
-        { opacity: 1, y: 0, letterSpacing: '0.15em', duration: 1, ease: 'power3.out', stagger: 0.15 },
-        '+=0.2'
-      )
-      // Screenplay direction fades in
-      .fromTo('.hero-direction',
+      // Overlay fades in
+      .fromTo('.hero-overlay',
         { opacity: 0 },
         { opacity: 1, duration: 0.8, ease: 'power2.out' },
+        '-=1'
+      )
+      // Production company fades in elegantly
+      .fromTo('.hero-production',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.4'
+      )
+      // Main title reveals with subtle movement
+      .fromTo('.hero-title',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, ease: 'power3.out' },
+        '-=0.4'
+      )
+      // Subtitle/tagline
+      .fromTo('.hero-subtitle',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.5'
+      )
+      // Divider line draws in
+      .fromTo('.hero-divider',
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.6, ease: 'power2.inOut' },
         '-=0.3'
       )
-      // Tagline with typewriter cursor
-      .fromTo('.hero-tagline',
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+      // Description text
+      .fromTo('.hero-description',
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8, ease: 'power2.out' },
         '-=0.2'
       )
-      // Episode count badge
-      .fromTo('.hero-episodes',
-        { opacity: 0, scale: 0.9 },
-        { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' },
-        '-=0.1'
-      )
-      // Scroll cue
+      // Scroll indicator
       .fromTo('.hero-scroll',
         { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-        '+=0.3'
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+        '+=0.2'
       );
 
-      // Scroll-driven fade out with cinematic feel
-      gsap.to(contentRef.current, {
-        opacity: 0,
-        y: -60,
-        scale: 0.98,
+      // Scroll-driven parallax and fade
+      gsap.to('.hero-bg-image', {
+        y: 100,
+        scale: 1.05,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '80% top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+
+      gsap.to(contentRef.current, {
+        opacity: 0,
+        y: -40,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '70% top',
           scrub: 0.5,
         },
       });
@@ -199,115 +201,85 @@ function HeroV2() {
   return (
     <section
       ref={sectionRef}
-      className="hero-section relative min-h-[100svh] flex items-center justify-center overflow-hidden -mt-8 sm:-mt-12"
+      className="hero-section relative min-h-[100svh] flex items-center justify-center overflow-hidden"
     >
-      {/* Corner Registration Marks - Film aesthetic */}
-      <div className="absolute top-8 left-8 w-8 h-8 border-l border-t border-[var(--text-muted)]/20 opacity-0 hero-meta" />
-      <div className="absolute top-8 right-8 w-8 h-8 border-r border-t border-[var(--text-muted)]/20 opacity-0 hero-meta" />
-      <div className="absolute bottom-8 left-8 w-8 h-8 border-l border-b border-[var(--text-muted)]/20 opacity-0 hero-meta" />
-      <div className="absolute bottom-8 right-8 w-8 h-8 border-r border-b border-[var(--text-muted)]/20 opacity-0 hero-meta" />
-
-      {/* Main Content Container - matches nav width */}
-      <div ref={contentRef} className="relative z-20 w-full max-w-7xl mx-auto px-4 md:px-6">
-        {/* Film Metadata Row */}
-        <div className="hero-meta flex items-center justify-between mb-8 sm:mb-12 opacity-0">
-          <div className="flex items-center gap-3 text-[10px] sm:text-xs tracking-[0.2em] text-[var(--text-muted)]/60 font-mono uppercase">
-            <span>CAM A</span>
-            <span className="w-1 h-1 rounded-full bg-[var(--text-muted)]/40" />
-            <span>24 FPS</span>
-            <span className="w-1 h-1 rounded-full bg-[var(--text-muted)]/40" />
-            <span>2.39:1</span>
-          </div>
-          <div className="text-[10px] sm:text-xs tracking-[0.15em] text-[var(--text-muted)]/60 font-mono">
-            TC 00:00:00:00
-          </div>
+      {/* Background Image Container */}
+      <div className="absolute inset-0">
+        {/*
+          Background Image - Replace src with your generated hero image
+          Recommended: /images/hero/hero-desktop.png (2688x1152px or larger)
+        */}
+        <div
+          className="hero-bg-image absolute inset-0 bg-cover bg-center bg-no-repeat opacity-0"
+          style={{
+            backgroundImage: 'url(/images/hero/hero-bg.jpg)',
+            // Fallback gradient if no image exists yet
+            backgroundColor: '#0a0a0a',
+          }}
+        >
+          {/* Fallback gradient pattern when no image */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(ellipse at 50% 30%, rgba(190, 213, 197, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 70%, rgba(201, 169, 98, 0.05) 0%, transparent 50%)',
+            }}
+          />
         </div>
 
-        {/* Centered Content */}
-        <div className="text-center">
+        {/* Gradient Overlays for text legibility and mood */}
+        <div className="hero-overlay absolute inset-0 opacity-0">
+          {/* Bottom gradient - stronger for text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent" />
+          {/* Top subtle vignette */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-transparent to-transparent" />
+          {/* Radial vignette for cinematic feel */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(10,10,10,0.4) 100%)',
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Content Container */}
+      <div ref={contentRef} className="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-8 text-center">
 
         {/* Production Company */}
-        <div className="hero-production mb-8 sm:mb-12 opacity-0">
-          <span className="text-[10px] sm:text-xs tracking-[0.4em] text-[var(--text-muted)]/70 uppercase">
+        <div className="hero-production mb-8 md:mb-10 opacity-0">
+          <span className="text-[11px] sm:text-xs tracking-[0.35em] text-[var(--text-muted)]/70 uppercase font-light">
             Light Brands Collective presents
           </span>
         </div>
 
-        {/* Scene Header - Screenplay style */}
-        <div className="hero-scene mb-6 sm:mb-8 opacity-0">
-          <span className="font-accent text-[10px] sm:text-xs tracking-[0.2em] text-sacred-gold-text/80 uppercase">
-            INT. THE HUMAN CONDITION — CONTINUOUS
+        {/* Main Title */}
+        <h1 className="hero-title font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-[0.12em] text-[var(--text-primary)] mb-6 md:mb-8 opacity-0">
+          TRANSCEND
+        </h1>
+
+        {/* Subtitle/Tagline */}
+        <p className="hero-subtitle font-body text-lg sm:text-xl md:text-2xl text-[var(--text-secondary)] tracking-wide mb-8 md:mb-10 opacity-0">
+          Bringing the Lost Traveler Back Home
+        </p>
+
+        {/* Elegant Divider */}
+        <div className="hero-divider w-16 sm:w-20 h-[1px] bg-sacred-gold/60 mx-auto mb-8 md:mb-10 origin-center opacity-0" />
+
+        {/* Description */}
+        <p className="hero-description font-body text-sm sm:text-base text-[var(--text-muted)] max-w-xl mx-auto leading-relaxed mb-4 opacity-0">
+          A documentary series about the journey from pain to purpose.
+          <br className="hidden sm:block" />
+          <span className="sm:inline"> </span>Six stories of people who stopped running—and came home.
+        </p>
+
+        {/* Scroll Indicator */}
+        <div className="hero-scroll absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-0">
+          <span className="text-[10px] tracking-[0.3em] text-[var(--text-muted)]/60 uppercase">
+            Scroll
           </span>
+          <div className="w-[1px] h-10 sm:h-12 bg-gradient-to-b from-[var(--text-muted)]/40 to-transparent" />
         </div>
 
-        {/* Main Title - Stacked for impact */}
-        <div className="mb-8 sm:mb-12">
-          <h1 className="font-display">
-            <span className="hero-title-line block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-[0.15em] text-[var(--text-primary)] opacity-0">
-              TRANSCEND
-            </span>
-          </h1>
-        </div>
-
-        {/* Screenplay Direction - Parenthetical */}
-        <div className="hero-direction mb-6 sm:mb-8 opacity-0">
-          <p className="font-accent text-xs sm:text-sm text-[var(--text-muted)]/80 italic max-w-lg mx-auto leading-relaxed">
-            (A documentary series about the journey from pain to purpose.
-            <br />
-            About people who stopped running—and came home.)
-          </p>
-        </div>
-
-        {/* Tagline with Typewriter Effect */}
-        <div className="hero-tagline mb-8 sm:mb-10 opacity-0">
-          <p className="font-body text-sm sm:text-base md:text-lg text-[var(--text-secondary)] tracking-wide">
-            Bringing the Lost Traveler Back Home
-            <span className={`inline-block w-[2px] h-[1.1em] bg-sacred-gold ml-1 align-middle ${showCursor ? 'opacity-100' : 'opacity-0'}`} />
-          </p>
-        </div>
-
-        {/* Episode Badge */}
-        <div className="hero-episodes opacity-0">
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 border border-[var(--border-color)] rounded-full">
-            <span className="w-2 h-2 rounded-full bg-sacred-gold/80" />
-            <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[var(--text-muted)] uppercase font-medium">
-              6 Episodes
-            </span>
-            <span className="text-[10px] sm:text-xs text-[var(--text-muted)]/60">
-              •
-            </span>
-            <span className="text-[10px] sm:text-xs tracking-[0.15em] text-[var(--text-muted)] uppercase">
-              Documentary Series
-            </span>
-          </div>
-        </div>
-
-        {/* Scroll Indicator - Film reel inspired */}
-        <div className="hero-scroll flex flex-col items-center gap-3 mt-12 sm:mt-16 opacity-0">
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 border border-[var(--text-muted)]/40 rounded-full" />
-            <div className="w-1.5 h-1.5 border border-[var(--text-muted)]/40 rounded-full" />
-            <div className="w-1.5 h-1.5 bg-sacred-gold/60 rounded-full" />
-            <div className="w-1.5 h-1.5 border border-[var(--text-muted)]/40 rounded-full" />
-            <div className="w-1.5 h-1.5 border border-[var(--text-muted)]/40 rounded-full" />
-          </div>
-          <span className="text-[9px] sm:text-[10px] text-[var(--text-muted)]/60 tracking-[0.25em] uppercase">
-            Begin
-          </span>
-          <div className="w-[1px] h-8 sm:h-10 bg-gradient-to-b from-sacred-gold/60 via-sacred-gold/30 to-transparent" />
-        </div>
-
-        </div>{/* End centered content */}
-
-        {/* Reel Markers - Bottom Row */}
-        <div className="hero-meta flex items-center justify-between mt-8 sm:mt-12 opacity-0">
-          <div className="text-[9px] sm:text-[10px] tracking-[0.15em] text-[var(--text-muted)]/50 font-mono uppercase">
-            Reel 01
-          </div>
-          <div className="text-[9px] sm:text-[10px] tracking-[0.15em] text-[var(--text-muted)]/50 font-mono uppercase">
-            Take 01
-          </div>
-        </div>
       </div>
     </section>
   );
