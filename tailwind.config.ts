@@ -21,9 +21,12 @@ const config: Config = {
         'light': '#F5F5F5',
         'bone': '#E8E4DC',
         // Accent colors - for meaning, never decoration
-        'sacred-gold': '#C9A962',
+        'sacred-gold': {
+          DEFAULT: '#bed5c5',
+          text: '#6a9b7e',
+        },
         'ember': '#D4A574',
-        'muted-gold': '#A89060',
+        'muted-gold': '#a8c4b0',
         // Deep forest green - ancient, nervous system
         'forest': {
           deep: '#0D1A14',
@@ -45,9 +48,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['Cormorant Garamond', 'Cormorant', 'Georgia', 'serif'],
-        body: ['Source Sans 3', 'Source Sans Pro', 'system-ui', 'sans-serif'],
-        accent: ['Special Elite', 'Courier New', 'monospace'],
+        display: ['Cormorant Garamond', 'Georgia', 'serif'],
+        body: ['Courier Prime', 'Courier New', 'monospace'],
+        accent: ['Courier Prime', 'Courier New', 'monospace'],
       },
       fontSize: {
         // Display Headlines

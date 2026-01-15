@@ -2,50 +2,26 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'light';
 
 interface ThemeContextType {
   theme: Theme;
-  toggleTheme: () => void;
-  setTheme: (theme: Theme) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Dark mode is the cinematic default
-  const [theme, setThemeState] = useState<Theme>('dark');
   const [mounted, setMounted] = useState(false);
 
-  // Load theme from localStorage on mount (dark is default for cinematic experience)
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme) {
-      setThemeState(savedTheme);
-    }
-    // Default to dark for cinematic feel, only switch to light if explicitly preferred
+    // Ensure light mode is always set
+    const root = document.documentElement;
+    root.classList.remove('dark');
+    root.classList.add('light');
   }, []);
 
-  // Update document class and localStorage when theme changes
-  useEffect(() => {
-    if (mounted) {
-      const root = document.documentElement;
-      root.classList.remove('light', 'dark');
-      root.classList.add(theme);
-      localStorage.setItem('theme', theme);
-    }
-  }, [theme, mounted]);
-
-  const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
-
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-  };
-
-  // Prevent flash of wrong theme by not rendering until mounted
+  // Prevent flash by not rendering until mounted
   if (!mounted) {
     return (
       <div style={{ visibility: 'hidden' }}>
@@ -55,7 +31,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme: 'light' }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -63,12 +39,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 export function useTheme() {
   const context = useContext(ThemeContext);
-  // Return dark as default during SSR/SSG for cinematic experience
   if (context === undefined) {
     return {
-      theme: 'dark' as Theme,
-      toggleTheme: () => {},
-      setTheme: () => {},
+      theme: 'light' as Theme,
     };
   }
   return context;

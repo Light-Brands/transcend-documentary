@@ -17,8 +17,9 @@
   --color-cloud: #C9C9C9;
   --color-light: #F5F5F5;
   --color-bone: #E8E4DC;
-  --color-sacred-gold: #C9A962;
-  --color-muted-gold: #A89060;
+  --color-sacred-gold: #bed5c5;
+  --color-sacred-gold-text: #6a9b7e;
+  --color-muted-gold: #a8c4b0;
   --color-ember: #D4A574;
 
   /* Deep forest green - ancient, nervous system */
@@ -37,10 +38,10 @@
   --color-warmth-3: #1a1815;
   --color-warmth-4: #1c1916;
 
-  /* Typography */
-  --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
-  --font-body: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
-  --font-accent: 'Special Elite', 'Courier New', monospace;
+  /* Typography - 2 fonts only */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Courier Prime', 'Courier New', monospace;
+  --font-accent: 'Courier Prime', 'Courier New', monospace;
 
   /* Header heights for scroll offset */
   --header-height: 80px;
@@ -126,8 +127,9 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-weight: 300;
-  line-height: 1.7;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color var(--transition-medium), color var(--transition-medium);
@@ -359,9 +361,15 @@ h1, h2, h3, h4, h5, h6 {
    =================================== */
 
 .header-utility-bar {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
+  background: #bed5c5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   transition: all var(--transition-medium);
+}
+
+.header-utility-bar,
+.header-utility-bar a,
+.header-utility-bar span {
+  color: #1A1A1A !important;
 }
 
 .header-main {
@@ -413,7 +421,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-dropdown-item:hover {
   background: var(--bg-secondary);
-  color: var(--color-sacred-gold);
+  color: var(--color-sacred-gold-text);
 }
 
 /* Mobile navigation */

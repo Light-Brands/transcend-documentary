@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { ThemeToggle } from './ThemeToggle';
 import { EPISODES } from '@/lib/constants';
 
 interface NavItem {
@@ -17,9 +17,9 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: 'The Documentary',
     children: [
-      { label: 'About the Series', href: '#journeys' },
-      { label: 'The Story', href: '#truth' },
-      { label: 'Nicholas', href: '#catalyst' },
+      { label: 'About the Series', href: '/#journeys' },
+      { label: 'The Story', href: '/#truth' },
+      { label: 'Nicholas', href: '/#catalyst' },
     ],
   },
   {
@@ -31,27 +31,17 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     label: 'The Clinic',
-    href: '#container',
+    href: '/#container',
   },
   {
     label: 'Partner With Us',
-    href: '#invitation',
+    href: '/#invitation',
   },
 ];
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -71,28 +61,15 @@ export function Header() {
 
   return (
     <>
-      <header
-        className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-          isScrolled && 'header-scrolled'
-        )}
-      >
+      <header className="relative z-50">
         {/* Utility Bar */}
-        <motion.div
-          className="header-utility-bar"
-          initial={{ y: 0 }}
-          animate={{
-            y: isScrolled ? -40 : 0,
-            opacity: isScrolled ? 0 : 1,
-          }}
-          transition={{ duration: 0.3 }}
-        >
+        <div className="header-utility-bar">
           <div className="max-w-7xl mx-auto px-4 md:px-6">
             <div className="flex items-center justify-between h-10">
               {/* Phone */}
               <a
                 href="tel:+1-888-TRANSCEND"
-                className="text-caption-sm text-[var(--text-muted)] hover:text-sacred-gold transition-colors flex items-center gap-2"
+                className="text-caption-sm text-[var(--text-muted)] hover:text-sacred-gold-text transition-colors flex items-center gap-2"
               >
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -102,59 +79,60 @@ export function Header() {
 
               {/* Right side */}
               <div className="flex items-center gap-4">
-                <ThemeToggle className="relative" />
                 <a
                   href="mailto:hello@transcenddocumentary.com"
-                  className="text-caption-sm font-accent uppercase tracking-wider text-sacred-gold hover:text-[var(--text-primary)] transition-colors"
+                  className="text-caption-sm font-accent uppercase tracking-wider text-sacred-gold-text hover:text-[var(--text-primary)] transition-colors"
                 >
                   Talk to an Expert
                 </a>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Main Header */}
         <div className="header-main">
           <div className="max-w-7xl mx-auto px-4 md:px-6">
-            <div
-              className={cn(
-                'flex items-center justify-between transition-all duration-300',
-                isScrolled ? 'h-14' : 'h-16'
-              )}
-            >
+            <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <Link href="/" className="flex items-center">
-                <motion.span
-                  className="font-display text-xl md:text-2xl tracking-[0.15em] text-[var(--text-primary)]"
+                <motion.div
+                  className="flex items-center"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
                 >
-                  TRANSCEND
-                </motion.span>
+                  <Image
+                    src="/Clinic_Small.png"
+                    alt="Transcend Clinic Logo"
+                    width={120}
+                    height={60}
+                    className="h-auto w-auto max-h-12 md:max-h-14"
+                    priority
+                  />
+                </motion.div>
               </Link>
 
               {/* Desktop Navigation */}
-              <nav className="hidden lg:flex items-center gap-8">
+              <nav className="hidden lg:flex items-center gap-8 uppercase">
                 {NAV_ITEMS.map((item) => (
                   <div key={item.label} className="nav-item relative">
                     {item.href ? (
                       <Link
                         href={item.href}
-                        className="text-body-sm text-[var(--text-secondary)] hover:text-sacred-gold transition-colors py-4"
+                        className="text-body-sm text-[var(--text-secondary)] hover:text-sacred-gold-text transition-colors py-4 uppercase"
                       >
                         {item.label}
                       </Link>
                     ) : (
                       <>
-                        <button className="text-body-sm text-[var(--text-secondary)] hover:text-sacred-gold transition-colors py-4 flex items-center gap-1">
+                        <button className="text-body-sm text-[var(--text-secondary)] hover:text-sacred-gold-text transition-colors py-4 flex items-center gap-1 uppercase">
                           {item.label}
                           <svg className="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
                         {item.children && (
-                          <div className="nav-dropdown">
+                          <div className="nav-dropdown uppercase">
                             {item.children.map((child) => (
                               <Link
                                 key={child.href}
@@ -199,9 +177,16 @@ export function Header() {
           >
             {/* Mobile Header */}
             <div className="flex items-center justify-between px-4 h-16 border-b border-[var(--border-color)]">
-              <span className="font-display text-xl tracking-[0.15em] text-[var(--text-primary)]">
-                TRANSCEND
-              </span>
+              <div className="flex items-center">
+                <Image
+                  src="/Clinic_Small.png"
+                  alt="Transcend Clinic Logo"
+                  width={100}
+                  height={50}
+                  className="h-auto w-auto max-h-10"
+                  priority
+                />
+              </div>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2 text-[var(--text-primary)]"
@@ -230,7 +215,7 @@ export function Header() {
                       <button
                         className={cn(
                           'mobile-nav-accordion-header w-full text-left text-lg',
-                          openAccordion === item.label && 'text-sacred-gold'
+                          openAccordion === item.label && 'text-sacred-gold-text'
                         )}
                         onClick={() => setOpenAccordion(openAccordion === item.label ? null : item.label)}
                       >
@@ -260,7 +245,7 @@ export function Header() {
                             <Link
                               key={child.href}
                               href={child.href}
-                              className="block px-8 py-3 text-[var(--text-secondary)] hover:text-sacred-gold transition-colors"
+                              className="block px-8 py-3 text-[var(--text-secondary)] hover:text-sacred-gold-text transition-colors"
                               onClick={handleNavClick}
                             >
                               {child.label}
@@ -286,7 +271,7 @@ export function Header() {
                 </a>
                 <a
                   href="mailto:hello@transcenddocumentary.com"
-                  className="inline-block font-accent uppercase tracking-wider text-sm text-sacred-gold"
+                  className="inline-block font-accent uppercase tracking-wider text-sm text-sacred-gold-text"
                 >
                   Talk to an Expert
                 </a>
@@ -296,8 +281,6 @@ export function Header() {
         )}
       </AnimatePresence>
 
-      {/* Spacer for fixed header */}
-      <div className={cn('transition-all duration-300', isScrolled ? 'h-14' : 'h-[104px]')} />
     </>
   );
 }

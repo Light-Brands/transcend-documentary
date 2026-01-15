@@ -1,14 +1,13 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { EPISODES } from '@/lib/constants';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export default function EpisodePage() {
   const params = useParams();
-  const router = useRouter();
   const episodeId = params.id as string;
 
   const episode = EPISODES.find((ep) => ep.id === episodeId);
@@ -18,12 +17,11 @@ export default function EpisodePage() {
 
   if (!episode) {
     return (
-      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center transition-colors duration-500">
-        <ThemeToggle className="fixed top-6 right-6 z-50" />
+      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-display text-4xl text-[var(--text-primary)] mb-4">Episode Not Found</h1>
-          <Link href="/#journeys" className="text-sacred-gold hover:underline">
-            Return to Episodes
+          <Link href="/" className="text-sacred-gold-text hover:text-[var(--text-primary)] transition-colors">
+            Return to Home
           </Link>
         </div>
       </div>
@@ -31,54 +29,69 @@ export default function EpisodePage() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--bg-primary)] transition-colors duration-500">
-      {/* Theme Toggle */}
-      <ThemeToggle className="fixed top-6 right-6 z-50" />
-
-      {/* Back navigation */}
-      <motion.nav
-        className="fixed top-0 left-0 right-0 z-40 px-6 py-4 bg-[var(--bg-primary)]/80 backdrop-blur-sm transition-colors duration-500"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link
-            href="/#journeys"
-            className="group flex items-center gap-3 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300"
-          >
-            <svg
-              className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <main className="min-h-screen bg-[var(--bg-primary)]">
+      {/* Header */}
+      <header className="relative z-50 border-b border-[var(--border-color)]">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="flex items-center justify-between h-16">
+            {/* Back link */}
+            <Link
+              href="/"
+              className="group flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
-            </svg>
-            <span className="text-sm uppercase tracking-widest">Back to Episodes</span>
-          </Link>
-          <Link href="/" className="font-display text-xl text-[var(--text-primary)] hover:text-sacred-gold transition-colors">
-            Transcend
-          </Link>
+              <svg
+                className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+              </svg>
+              <span className="text-xs sm:text-sm uppercase tracking-[0.15em]">Back</span>
+            </Link>
+
+            {/* Logo */}
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/Clinic_Small.png"
+                alt="Transcend Clinic Logo"
+                width={100}
+                height={50}
+                className="h-auto w-auto max-h-10 md:max-h-12"
+                priority
+              />
+            </Link>
+
+            {/* Episode indicator */}
+            <span className="text-xs sm:text-sm tracking-[0.15em] text-[var(--text-muted)] uppercase">
+              {episode.number}
+            </span>
+          </div>
         </div>
-      </motion.nav>
+      </header>
 
       {/* Hero section */}
-      <section className="relative pt-32 pb-20 px-6 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)] transition-colors duration-500">
-        <div className="max-w-5xl mx-auto">
-          {/* Episode number */}
-          <motion.span
-            className="inline-block text-caption-sm uppercase text-sacred-gold tracking-[0.3em] mb-6"
+      <section className="relative pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          {/* Episode metadata */}
+          <motion.div
+            className="flex items-center gap-3 mb-6 sm:mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {episode.number}
-          </motion.span>
+            <span className="text-[10px] sm:text-xs tracking-[0.3em] text-sacred-gold-text uppercase font-medium">
+              {episode.number}
+            </span>
+            <div className="w-8 sm:w-12 h-[1px] bg-[var(--border-color)]" />
+            <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[var(--text-muted)] uppercase">
+              {episode.theme} / {episode.themeSecondary}
+            </span>
+          </motion.div>
 
           {/* Title */}
           <motion.h1
-            className="font-display text-display-sm md:text-display text-[var(--text-primary)] mb-6"
+            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide text-[var(--text-primary)] mb-6 sm:mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -86,106 +99,106 @@ export default function EpisodePage() {
             {episode.title}
           </motion.h1>
 
-          {/* Themes */}
-          <motion.div
-            className="flex items-center gap-3 mb-8 flex-wrap"
+          {/* Hook */}
+          <motion.p
+            className="font-display text-lg sm:text-xl md:text-2xl text-[var(--text-secondary)] italic max-w-3xl leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <span className="text-lg text-[var(--text-secondary)]">{episode.theme}</span>
-            <span className="text-sacred-gold text-xl">&</span>
-            <span className="text-lg text-[var(--text-secondary)]">{episode.themeSecondary}</span>
-            <span className="mx-4 h-px w-12 bg-[var(--border-color)]" />
-            <span className="text-[var(--text-muted)]">{episode.runtime}</span>
-          </motion.div>
-
-          {/* Hook */}
-          <motion.p
-            className="text-quote text-[var(--text-secondary)]/90 font-display italic max-w-3xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
             {episode.hook}
           </motion.p>
+
+          {/* Runtime */}
+          <motion.div
+            className="mt-6 sm:mt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <span className="text-xs sm:text-sm text-[var(--text-muted)]">
+              Runtime: {episode.runtime}
+            </span>
+          </motion.div>
         </div>
       </section>
 
       {/* Decorative divider */}
-      <div className="max-w-5xl mx-auto px-6 bg-[var(--bg-tertiary)] transition-colors duration-500">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <motion.div
-          className="h-px bg-gradient-to-r from-transparent via-sacred-gold/40 to-transparent"
+          className="h-[1px] bg-gradient-to-r from-transparent via-sacred-gold/40 to-transparent"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 0.4 }}
         />
       </div>
 
       {/* Synopsis section */}
-      <section className="py-20 px-6 bg-[var(--bg-tertiary)] transition-colors duration-500">
-        <div className="max-w-4xl mx-auto">
-          <motion.h2
-            className="text-caption uppercase text-[var(--text-muted)] tracking-[0.2em] mb-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            Synopsis
-          </motion.h2>
+      <section className="py-12 sm:py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="max-w-3xl">
+            <motion.span
+              className="text-[10px] sm:text-xs tracking-[0.25em] text-[var(--text-muted)] uppercase mb-8 sm:mb-10 block"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              Synopsis
+            </motion.span>
 
-          <div className="space-y-8">
-            {episode.synopsis.map((paragraph, index) => (
-              <motion.p
-                key={index}
-                className="text-body-lg text-[var(--text-secondary)] leading-relaxed"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 + index * 0.15 }}
-              >
-                {paragraph}
-              </motion.p>
-            ))}
+            <div className="space-y-6 sm:space-y-8">
+              {episode.synopsis.map((paragraph, index) => (
+                <motion.p
+                  key={index}
+                  className="font-body text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                >
+                  {paragraph}
+                </motion.p>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Pull quote section */}
-      <section className="py-16 px-6 bg-[var(--bg-secondary)] transition-colors duration-500">
-        <motion.div
-          className="max-w-4xl mx-auto relative"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-sacred-gold via-sacred-gold/50 to-transparent" />
-          <blockquote className="pl-8 md:pl-12">
-            <p className="font-display text-quote-lg md:text-section-sm text-[var(--text-primary)] italic leading-relaxed">
+      <section className="py-12 sm:py-16 md:py-20 bg-[var(--bg-secondary)]">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <motion.blockquote
+            className="max-w-3xl pl-6 sm:pl-8 border-l-2 border-sacred-gold/50"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="font-display text-xl sm:text-2xl md:text-3xl text-sacred-gold-text italic leading-relaxed">
               "{episode.pullQuote}"
             </p>
             {episode.quoteAttribution && (
-              <footer className="mt-6 text-[var(--text-muted)]">
-                <span className="text-sacred-gold">—</span> {episode.quoteAttribution}
+              <footer className="mt-4 sm:mt-6 text-sm text-[var(--text-muted)]">
+                — {episode.quoteAttribution}
               </footer>
             )}
-          </blockquote>
-        </motion.div>
+          </motion.blockquote>
+        </div>
       </section>
 
       {/* Themes section */}
-      <section className="py-16 px-6 bg-[var(--bg-secondary)] transition-colors duration-500">
-        <div className="max-w-4xl mx-auto">
-          <motion.h2
-            className="text-caption uppercase text-[var(--text-muted)] tracking-[0.2em] mb-8"
+      <section className="py-12 sm:py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <motion.span
+            className="text-[10px] sm:text-xs tracking-[0.25em] text-[var(--text-muted)] uppercase mb-6 sm:mb-8 block"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
             Themes Explored
-          </motion.h2>
+          </motion.span>
 
           <motion.div
-            className="flex flex-wrap gap-3"
+            className="flex flex-wrap gap-2 sm:gap-3"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -194,7 +207,7 @@ export default function EpisodePage() {
             {episode.themes.map((theme, index) => (
               <motion.span
                 key={theme}
-                className="px-4 py-2 border border-[var(--border-color)] text-sm text-[var(--text-secondary)] hover:border-sacred-gold hover:text-sacred-gold transition-colors duration-300"
+                className="text-[10px] sm:text-xs tracking-wider text-[var(--text-muted)] uppercase px-3 sm:px-4 py-1.5 sm:py-2 border border-[var(--border-color)] rounded-full hover:border-sacred-gold-text hover:text-sacred-gold-text transition-colors duration-300"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -208,53 +221,53 @@ export default function EpisodePage() {
       </section>
 
       {/* Episode navigation */}
-      <section className="py-20 px-6 border-t border-[var(--border-color)] bg-[var(--bg-primary)] transition-colors duration-500">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section className="py-12 sm:py-16 md:py-20 border-t border-[var(--border-color)]">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             {/* Previous episode */}
             <div>
               {prevEpisode ? (
                 <Link href={`/episodes/${prevEpisode.id}`} className="group block">
-                  <span className="text-caption-sm uppercase text-[var(--text-muted)] tracking-widest mb-2 block">
-                    Previous Episode
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[var(--text-muted)] uppercase mb-3 block">
+                    Previous
                   </span>
                   <div className="flex items-center gap-3">
                     <svg
-                      className="w-5 h-5 text-sacred-gold transform group-hover:-translate-x-2 transition-transform duration-300"
+                      className="w-4 h-4 text-sacred-gold-text transform group-hover:-translate-x-1 transition-transform duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
                     </svg>
-                    <span className="font-display text-xl text-[var(--text-primary)] group-hover:text-sacred-gold transition-colors duration-300">
+                    <span className="font-display text-lg sm:text-xl text-[var(--text-primary)] group-hover:text-sacred-gold-text transition-colors duration-300">
                       {prevEpisode.title}
                     </span>
                   </div>
                 </Link>
               ) : (
-                <div className="opacity-30">
-                  <span className="text-caption-sm uppercase text-[var(--text-muted)] tracking-widest mb-2 block">
-                    Previous Episode
+                <div className="opacity-40">
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[var(--text-muted)] uppercase mb-3 block">
+                    Previous
                   </span>
-                  <span className="text-[var(--text-muted)]">This is the first episode</span>
+                  <span className="text-sm text-[var(--text-muted)]">First episode</span>
                 </div>
               )}
             </div>
 
             {/* Next episode */}
-            <div className="text-right">
+            <div className="md:text-right">
               {nextEpisode ? (
                 <Link href={`/episodes/${nextEpisode.id}`} className="group block">
-                  <span className="text-caption-sm uppercase text-[var(--text-muted)] tracking-widest mb-2 block">
-                    Next Episode
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[var(--text-muted)] uppercase mb-3 block">
+                    Next
                   </span>
-                  <div className="flex items-center justify-end gap-3">
-                    <span className="font-display text-xl text-[var(--text-primary)] group-hover:text-sacred-gold transition-colors duration-300">
+                  <div className="flex items-center md:justify-end gap-3">
+                    <span className="font-display text-lg sm:text-xl text-[var(--text-primary)] group-hover:text-sacred-gold-text transition-colors duration-300">
                       {nextEpisode.title}
                     </span>
                     <svg
-                      className="w-5 h-5 text-sacred-gold transform group-hover:translate-x-2 transition-transform duration-300"
+                      className="w-4 h-4 text-sacred-gold-text transform group-hover:translate-x-1 transition-transform duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -264,11 +277,11 @@ export default function EpisodePage() {
                   </div>
                 </Link>
               ) : (
-                <div className="opacity-30">
-                  <span className="text-caption-sm uppercase text-[var(--text-muted)] tracking-widest mb-2 block">
-                    Next Episode
+                <div className="opacity-40">
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[var(--text-muted)] uppercase mb-3 block">
+                    Next
                   </span>
-                  <span className="text-[var(--text-muted)]">This is the last episode</span>
+                  <span className="text-sm text-[var(--text-muted)]">Last episode</span>
                 </div>
               )}
             </div>
@@ -277,28 +290,56 @@ export default function EpisodePage() {
       </section>
 
       {/* CTA section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-[var(--bg-primary)] to-[var(--bg-secondary)] transition-colors duration-500">
-        <motion.div
-          className="max-w-3xl mx-auto text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="font-display text-section-sm md:text-section text-[var(--text-primary)] mb-6">
-            Ready to Continue the Journey?
-          </h2>
-          <p className="text-[var(--text-secondary)] mb-10">
-            Explore more stories of transformation and discover what happens when we stop running.
-          </p>
-          <Link
-            href="/#journeys"
-            className="inline-flex items-center justify-center px-8 py-4 bg-sacred-gold text-[var(--bg-primary)] font-body text-sm uppercase tracking-widest hover:bg-transparent hover:text-sacred-gold border border-sacred-gold transition-all duration-300"
+      <section className="py-16 sm:py-20 md:py-24 bg-[var(--bg-secondary)]">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <motion.div
+            className="max-w-2xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            View All Episodes
-          </Link>
-        </motion.div>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-[var(--text-primary)] mb-4 sm:mb-6">
+              Continue the Journey
+            </h2>
+            <p className="font-body text-sm sm:text-base text-[var(--text-muted)] mb-8 sm:mb-10">
+              Explore more stories of transformation and discover what happens when we stop running.
+            </p>
+            <Link
+              href="/"
+              className="
+                inline-block px-6 sm:px-8 py-3 sm:py-4
+                border border-sacred-gold text-sacred-gold-text
+                font-accent text-xs sm:text-sm tracking-[0.15em] uppercase
+                transition-all duration-300
+                hover:bg-sacred-gold hover:text-white
+              "
+            >
+              View All Episodes
+            </Link>
+          </motion.div>
+        </div>
       </section>
+
+      {/* Footer */}
+      <footer className="py-8 sm:py-10 border-t border-[var(--border-color)]">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/Clinic_Small.png"
+                alt="Transcend Clinic Logo"
+                width={80}
+                height={40}
+                className="h-auto w-auto max-h-8"
+              />
+            </Link>
+            <p className="text-[10px] sm:text-xs text-[var(--text-muted)] tracking-wider">
+              © {new Date().getFullYear()} Transcend Documentary. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
