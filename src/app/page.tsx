@@ -527,7 +527,7 @@ function TruthV2() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-32 sm:py-40 md:py-48 lg:py-56">
+    <section ref={sectionRef} id="truth" className="relative py-32 sm:py-40 md:py-48 lg:py-56">
       <div className="flex items-center justify-center">
         <div className="text-center px-4 sm:px-6 md:px-8 max-w-4xl">
           {/* Main text block - all appears together */}
@@ -644,7 +644,7 @@ function ContainerV2() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="container-section relative">
+    <section ref={sectionRef} id="container" className="container-section relative">
       <div ref={contentRef} className="h-[100svh] flex items-center justify-center overflow-hidden">
         {/* Background with pattern */}
         <div className="container-bg absolute inset-0 bg-gradient-to-b from-[var(--bg-secondary)] via-[var(--bg-tertiary)] to-[var(--bg-secondary)]">
@@ -812,7 +812,7 @@ function EpisodesV2() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-20 sm:py-28 md:py-36 lg:py-44 px-4 sm:px-6 md:px-8">
+    <section ref={sectionRef} id="journeys" className="relative py-20 sm:py-28 md:py-36 lg:py-44 px-4 sm:px-6 md:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="episodes-header text-center mb-16 sm:mb-20 md:mb-28 lg:mb-32 opacity-0">
@@ -1156,7 +1156,7 @@ function InvitationV2() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="invitation-section" className="invitation-section relative py-20 sm:py-28 md:py-36 lg:py-44 px-4 sm:px-6 md:px-8 bg-[var(--bg-primary)]">
+    <section ref={sectionRef} id="invitation" className="invitation-section relative py-20 sm:py-28 md:py-36 lg:py-44 px-4 sm:px-6 md:px-8 bg-[var(--bg-primary)]">
       <div className="max-w-3xl mx-auto text-center">
         <div id="partnership-content" className="invitation-content opacity-0">
           {/* Scene marker */}

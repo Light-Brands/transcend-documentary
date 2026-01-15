@@ -17,9 +17,9 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: 'The Documentary',
     children: [
-      { label: 'About the Series', href: '/#journeys' },
       { label: 'The Story', href: '/#truth' },
-      { label: 'Nicholas', href: '/#catalyst' },
+      { label: 'The Clinic', href: '/#container' },
+      { label: 'Episodes', href: '/#journeys' },
     ],
   },
   {
@@ -28,10 +28,6 @@ const NAV_ITEMS: NavItem[] = [
       label: `${ep.number}: ${ep.title}`,
       href: `/episodes/${ep.id}`,
     })),
-  },
-  {
-    label: 'The Clinic',
-    href: '/#container',
   },
   {
     label: 'Partner With Us',
