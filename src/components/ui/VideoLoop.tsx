@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { useTheme } from '@/context/ThemeContext';
 
 interface VideoLoopProps {
   src?: string;
@@ -120,11 +119,9 @@ export function VideoBackground({
   overlayOpacity = 0.6,
 }: VideoBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
 
-  // Colors for overlay based on theme
-  const overlayColor = isDark ? '10, 10, 10' : '250, 250, 250';
+  // Colors for overlay (light mode)
+  const overlayColor = '250, 250, 250';
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
